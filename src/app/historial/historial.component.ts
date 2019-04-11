@@ -1,72 +1,184 @@
+
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
-import { FormControl } from '@angular/forms';
+import { Router } from '@angular/router';
+import { DatePipe } from '@angular/common';
 
-export interface Cliente {
-  rut: string;
-  nombre: string;
-  cantidad: number;
+export interface Hadmin {
+  empresa: string;
+  fecha: Date;
+  menu1: string;
+  menu2: string;
+  menu3: string;
+  menu4: string;
+  cant1: number;
+  cant2: number;
+  cant3: number;
+  cant4: number;
 }
-const restCliente: Cliente[] = [
+const restHadmin: Hadmin[] = [
   {
-    rut: '7.547.734-1',
-    nombre: 'Baresi',
-    cantidad: 41,
+    empresa: 'CCU',
+    fecha: new Date('9/9/19'),
+    menu1: 'Porotos',
+    menu2: 'Cazuela de ave',
+    menu3: 'garbanzos',
+    menu4: 'pollo con papas fritas',
+    cant1: 31,
+    cant2: 12,
+    cant3: 2,
+    cant4: 41,
   },
   {
-    rut: '18.990.554-8',
-    nombre: 'Unimarc',
-    cantidad: 72,
+    empresa: 'Cocacola',
+    fecha: new Date('8/9/19'),
+    menu1: 'Porotos',
+    menu2: 'Cazuela de ave',
+    menu3: 'garbanzos',
+    menu4: 'pollo con papas fritas',
+    cant1: 81,
+    cant2: 72,
+    cant3: 33,
+    cant4: 11,
   },
   {
-    rut: '19.658.990-2',
-    nombre: 'Cencosud',
-    cantidad: 222,
+    empresa: 'P&G',
+    fecha: new Date('7/9/19'),
+    menu1: 'Porotos',
+    menu2: 'Cazuela de ave',
+    menu3: 'garbanzos',
+    menu4: 'pollo con papas fritas',
+    cant1: 33,
+    cant2: 22,
+    cant3: 21,
+    cant4: 21,
   },
-];
-
-var cambiar: Cliente =
-{
-  rut: '',
-  nombre: '',
-  cantidad: 0,
-}
-
+  {
+    empresa: 'CCU',
+    fecha: new Date('6/9/19'),
+    menu1: 'Porotos',
+    menu2: 'Cazuela de ave',
+    menu3: 'garbanzos',
+    menu4: 'pollo con papas fritas',
+    cant1: 31,
+    cant2: 12,
+    cant3: 2,
+    cant4: 41,
+  },
+  {
+    empresa: 'Cocacola',
+    fecha: new Date('5/9/19'),
+    menu1: 'Porotos',
+    menu2: 'Cazuela de ave',
+    menu3: 'garbanzos',
+    menu4: 'pollo con papas fritas',
+    cant1: 81,
+    cant2: 72,
+    cant3: 33,
+    cant4: 11,
+  },
+  {
+    empresa: 'P&G',
+    fecha: new Date('4/9/19'),
+    menu1: 'Porotos',
+    menu2: 'Cazuela de ave',
+    menu3: 'garbanzos',
+    menu4: 'pollo con papas fritas',
+    cant1: 33,
+    cant2: 22,
+    cant3: 21,
+    cant4: 21,
+  },
+  {
+    empresa: 'CCU',
+    fecha: new Date('3/9/19'),
+    menu1: 'Porotos',
+    menu2: 'Cazuela de ave',
+    menu3: 'garbanzos',
+    menu4: 'pollo con papas fritas',
+    cant1: 31,
+    cant2: 12,
+    cant3: 2,
+    cant4: 41,
+  },
+  {
+    empresa: 'Cocacola',
+    fecha: new Date('2/9/19'),
+    menu1: 'Porotos',
+    menu2: 'Cazuela de ave',
+    menu3: 'garbanzos',
+    menu4: 'pollo con papas fritas',
+    cant1: 81,
+    cant2: 72,
+    cant3: 33,
+    cant4: 11,
+  },
+  {
+    empresa: 'P&G',
+    fecha: new Date('1/9/19'),
+    menu1: 'Porotos',
+    menu2: 'Cazuela de ave',
+    menu3: 'garbanzos',
+    menu4: 'pollo con papas fritas',
+    cant1: 13,
+    cant2: 22,
+    cant3: 21,
+    cant4: 21,
+  },
+  
+]
+//0: {id: "1", name: "Olivia L.", progress: "52", color: "black"},
+//1: {id: "2", name: "Levi V.", progress: "98", color: "purple"},...
 @Component({
   selector: 'app-historial',
   templateUrl: './historial.component.html',
   styleUrls: ['./historial.component.css']
 })
 export class HistorialComponent implements OnInit {
-  displayedColumns: string[] = ['rut', 'nombre', 'cantidad'];
-  dataSource: MatTableDataSource<Cliente>;
-  Cambiar = new FormControl(cambiar);
+
+  displayedColumns: string[] = ['fecha', 'menu1','cant1', 'menu2','cant2', 'menu3','cant3','menu4','cant4'];
+  dataSource: MatTableDataSource<Hadmin>;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
-  constructor() {
-    this.dataSource = new MatTableDataSource(restCliente);
+  constructor(private _router: Router) {
+    this.dataSource = new MatTableDataSource(restHadmin);
   }
 
   ngOnInit() {
+    if (localStorage.getItem("currentUser") === null) {
+      this._router.navigate(['']);
+    }
+    else {
+      var user = JSON.parse(localStorage.getItem('currentUser'));
+      if (user.role == 'admin') {
+        console.log(user.role);
+        console.log(restHadmin[0].fecha);
+        this.dataSource.paginator = this.paginator;
+        this.dataSource.sort = this.sort;
+      }
+      else {
+        this._router.navigate(['']);
+      }
 
-    this.dataSource.paginator = this.paginator;
-    this.dataSource.sort = this.sort;
+    }
+
   }
   applyFilter(filterValue: string) {
+    
+    if(filterValue=='9/9/19')
+    {
+      var a=new Date('9/9/19')
+      var b=a.toUTCString();
+      console.log(b);
+    }
     this.dataSource.filter = filterValue.trim().toLowerCase();
-    console.log(this.dataSource.filteredData);
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage();
     }
   }
 
-  public click(e: any) {
-    console.log(e);
-    this.Cambiar=e;
-    console.log(this.Cambiar);
-
-  }
-
 }
+
+
