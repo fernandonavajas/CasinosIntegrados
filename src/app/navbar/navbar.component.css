@@ -1,0 +1,39 @@
+.spacer {
+  flex: 1 1 auto;
+}
+
+.separacion{
+  padding: 20px;
+}
+.icon{
+  width: 150px;
+  height: 50px;
+  border-radius: 10%;
+  padding: 0 10px;
+}
+.btnMenu{
+
+  background: rgb(56, 68, 168);
+  margin: 10px;
+  color: aliceblue;
+}
+.btnMenu1{
+
+  background: rgb(44, 49, 95);
+  margin: 10px;
+  color: aliceblue;
+}
+
+.btnExit{
+    background: #D68500;
+    color: aliceblue;
+    margin: 10px;
+}
+
+.bg{
+    background: #005DA9;
+    color: aliceblue;
+}
+p{
+  margin-right: 50px;
+}

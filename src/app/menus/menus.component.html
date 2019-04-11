@@ -1,0 +1,102 @@
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Menu</title>
+    <link href="/src/app/login/login.component.css">
+  </head>
+  <body>
+    <div class="descripcion">Elección de menus por día</div>
+    <div class="container ">
+      <mat-accordion>
+
+        <!-- dia numero 0-->
+        <mat-expansion-panel (opened)="panelOpenState = true" (closed)="capturar(d0p0.value,d0p1.value,d0p2.value,d0p3.value)">
+          <mat-expansion-panel-header>
+            <mat-panel-title id='dia0'>{{menu.value[0].dia}}</mat-panel-title>
+            <mat-panel-description>Elige el menu </mat-panel-description>
+          </mat-expansion-panel-header>
+
+          <mat-form-field >
+            <input type="number" matInput #d0p0  id='dia0P0' placeholder={{menu.value[0].plato0}} value={{menu.value[0].cantidad0}} >
+          </mat-form-field>
+          <mat-form-field>
+            <input type="number" matInput #d0p1 id='dia0P1' placeholder={{menu.value[0].plato1}} value={{menu.value[0].cantidad1}}>
+          </mat-form-field>
+          <mat-form-field>
+            <input type="number" matInput #d0p2 id='dia0P2' placeholder={{menu.value[0].plato2}} value={{menu.value[0].cantidad2}}>
+          </mat-form-field>
+          <mat-form-field>
+            <input type="number" matInput #d0p3 id='dia0P3' placeholder={{menu.value[0].plato3}} value={{menu.value[0].cantidad3}}>
+          </mat-form-field>
+        </mat-expansion-panel>
+
+        <!-- dia numero 1-->
+        <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+          <mat-expansion-panel-header>
+            <mat-panel-title id='dia1'>{{menu.value[1].dia}}</mat-panel-title>
+            <mat-panel-description #d11 id="d1" >Elige el menu {{ panelOpenState ? (Si()) : (No())}}</mat-panel-description>
+          </mat-expansion-panel-header>
+
+          <mat-form-field>
+            <input type="number" matInput #d1p0 id='dia1P0' placeholder={{menu.value[1].plato0}} value={{menu.value[1].cantidad0}}>
+          </mat-form-field>
+          <mat-form-field>
+            <input type="number" matInput #d1p1 id='dia1P1' placeholder={{menu.value[1].plato1}} value={{menu.value[1].cantidad1}}>
+          </mat-form-field>
+          <mat-form-field>
+            <input type="number" matInput #d1p2 id='dia1P2' placeholder={{menu.value[1].plato2}} value={{menu.value[1].cantidad2}}>
+          </mat-form-field>
+          <mat-form-field>
+            <input type="number" matInput #d1p3 id='dia1P3' placeholder={{menu.value[1].plato3}} value={{menu.value[1].cantidad3}}>
+          </mat-form-field>
+        </mat-expansion-panel>
+
+        <!-- dia numero 2-->
+        <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+          <mat-expansion-panel-header>
+            <mat-panel-title id='dia2'>{{menu.value[2].dia}}</mat-panel-title>
+            <mat-panel-description>Elige el menu {{ panelOpenState ? (Si(id)) : (No(id))}}</mat-panel-description>
+          </mat-expansion-panel-header>
+
+          <mat-form-field>
+            <input type="number" matInput #d2p0 id='dia0P0' placeholder={{menu.value[2].plato0}} value={{menu.value[2].cantidad0}}>
+          </mat-form-field>
+          <mat-form-field>
+            <input type="number" matInput #d2p1 id='dia0P1' placeholder={{menu.value[2].plato1}} value={{menu.value[2].cantidad1}}>
+          </mat-form-field>
+          <mat-form-field>
+            <input type="number" matInput #d2p2 id='dia0P2' placeholder={{menu.value[2].plato2}} value={{menu.value[2].cantidad2}}>
+          </mat-form-field>
+          <mat-form-field>
+            <input type="number" matInput #d2p3 id='dia0P3' placeholder={{menu.value[2].plato3}} value={{menu.value[2].cantidad3}}>
+          </mat-form-field>
+
+        </mat-expansion-panel>
+
+        <!-- dia numero 3-->
+        <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+          <mat-expansion-panel-header>
+            <mat-panel-title id='dia2'>{{menu.value[3].dia}}</mat-panel-title>
+            <mat-panel-description>Elige el menu {{ panelOpenState ? (Si(id)) : (No(id))}}</mat-panel-description>
+          </mat-expansion-panel-header>
+
+          <mat-form-field>
+            <input type="number" matInput #d3p0 id='dia3P0' placeholder={{menu.value[3].plato0}} value={{menu.value[3].cantidad0}}>
+          </mat-form-field>
+          <mat-form-field>
+            <input type="number" matInput #d3p1 id='dia3P1' placeholder={{menu.value[3].plato1}} value={{menu.value[3].cantidad1}}>
+          </mat-form-field>
+          <mat-form-field>
+            <input type="number" matInput #d3p2 id='dia3P2' placeholder={{menu.value[3].plato2}} value={{menu.value[3].cantidad2}}>
+          </mat-form-field>
+          <mat-form-field>
+            <input type="number" matInput #d3p3 id='dia3P3' placeholder={{menu.value[3].plato3}} value={{menu.value[3].cantidad3}}>
+          </mat-form-field>
+
+        </mat-expansion-panel>
+
+
+
+      </mat-accordion>
+    </div>
+  </body>

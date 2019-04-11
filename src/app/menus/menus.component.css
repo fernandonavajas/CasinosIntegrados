@@ -1,0 +1,45 @@
+body {
+    margin: 0;
+    padding: 0;
+    background: url('../../assets/img/plato1.jpg') no-repeat center top ;
+    background-size: cover;
+    font-family: sans-serif;
+    height: 95vh;
+    
+  }
+
+.descripcion{
+    font-family: sans-serif;
+    color: rgb(218, 226, 233);
+    font-size: 32px;
+    -webkit-text-stroke: 1px rgb(41, 47, 58);
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    width: 1;
+    padding: 20px;
+
+}
+mat-panel-description{
+    font-family: sans-serif;
+    
+
+    
+}
+.container {
+    display: flex; /* or inline-flex */
+    width: 1;
+    justify-content: center;
+
+}
+
+mat-form-field{
+    margin-left: 25px;
+}
+
+mat-expansion-panel-header{
+    
+}
+mat-expansion-panel{
+    
+}
