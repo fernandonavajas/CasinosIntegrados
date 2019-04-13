@@ -1,6 +1,59 @@
-.btnMenu{
+body{
+  background: #085078;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to left, #85D8CE, #085078);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to left, #85D8CE, #085078); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  background-size: cover;
+  height: 100vh;
+}
 
-    background: rgb(56, 68, 168);
-    margin: 10px;
-    color: aliceblue;
+table {
+    width:95%;
+    margin-left: 2.5%;
+    margin-right: 2.5%;
+
   }
+  
+  .mat-form-field {
+    font-size: 15px;
+    width: 80%;
+    margin-left: 10%;
+    margin-right: 10%;
+  }
+  
+  td, th {
+    width: 9%;
+    font-size: 10px;
+    font-family: sans-serif;
+  }
+  
+  .mat-header-cell, .mat-cell {
+    padding: 0 10px; 
+  }
+  
+  .header-group-row {
+    border: none;
+    align-items: stretch;
+  }
+  .header-group {
+      display: flex;
+      align-items: center;
+      border-right: 1px solid rgba(0, 0, 0, 0.12);
+      border-left: 1px solid rgba(0, 0, 0, 0.12);
+  }
+  td{
+    
+  }
+
+.cantidad{
+  width: 50px;
+  border-width: 1px;
+
+  }
+
+  .btnAgregar{
+    background: rgb(86, 146, 17);
+    color: aliceblue;
+    margin-top: 10px;
+    margin-left: 89%;
+    }
+  

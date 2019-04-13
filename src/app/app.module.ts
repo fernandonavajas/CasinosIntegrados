@@ -20,9 +20,9 @@ import { ClientesAdminComponent } from './clientes-admin/clientes-admin.componen
 
 //rutas
 const routes: Routes = [
-  { path: 'registro', component: RegistrosComponent },
+  { path: 'menu', component: RegistrosComponent },
   { path: '', component: LoginComponent },
-  { path: 'menu', component: MenusComponent},
+  { path: 'registro', component: MenusComponent},
   { path: 'historial', component: HistorialComponent},
   { path: 'contacto', component:ContactoComponent},
   { path: 'Hadmin', component:HomeAdminComponent},

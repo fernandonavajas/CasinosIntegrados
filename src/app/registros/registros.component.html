@@ -1,1 +1,100 @@
-<button mat-raised-button (click)="Hmenu()" class="btnMenu">Madmin</button>
+<body>
+    <mat-form-field>
+        <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filtro">
+    </mat-form-field>
+
+        <table mat-table [dataSource]="dataSource" matSort>
+
+            <!-- Disfruto -Carla Morrison -->
+            <ng-container matColumnDef="fecha">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Fecha </th>
+                <td mat-cell *matCellDef="let row"  > {{row.fecha | date:'shortDate' }} </td>
+            </ng-container>
+
+            <!-- menu 1 Column -->
+            <ng-container matColumnDef="menu1">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Menú Industrial </th>
+                <td mat-cell *matCellDef="let row"> {{row.menu1}} </td>
+
+            </ng-container>
+
+            <!-- cantidad 1 Column -->
+            <ng-container matColumnDef="cant1">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Cantidad </th>
+                <td mat-cell *matCellDef="let row">
+                    <input class="cantidad"  #i1 type="number" value={{row.cant1}} (change)="cambio(row.fecha,i1.value,1)" >
+                </td>
+            </ng-container>
+
+            <!-- menu 2 Column -->
+            <ng-container matColumnDef="menu2">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Menú de la casa </th>
+                <td mat-cell *matCellDef="let row"> {{row.menu2}} </td>
+            </ng-container>
+
+            <!-- cantidad 2 Column -->
+            <ng-container matColumnDef="cant2">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Cantidad</th>
+                <td mat-cell *matCellDef="let row">
+                    <input class="cantidad" #i2 type="number" value={{row.cant2}} (change)="cambio(row.fecha,i2.value,2)">
+                </td>
+            </ng-container>
+
+            <!-- menu 3 Column -->
+            <ng-container matColumnDef="menu3">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Menú oficina </th>
+                <td mat-cell *matCellDef="let row"> {{row.menu3}} </td>
+            </ng-container>
+
+            <!-- cantidad 3 Column -->
+            <ng-container matColumnDef="cant3">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Cantidad </th>
+                <td mat-cell *matCellDef="let row" >
+                    <input class="cantidad" #i3 type="number" value={{row.cant3}} (change)="cambio(row.fecha,i3.value,3)">
+                </td>
+            </ng-container>
+
+            <!-- menu 4 Column -->
+            <ng-container matColumnDef="menu4">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Menú hipocalórico </th>
+                <td mat-cell *matCellDef="let row"> {{row.menu4}} </td>
+            </ng-container>
+
+            <!-- cantidad 4 Column -->
+            <ng-container matColumnDef="cant4">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Cantidad </th>
+                <td mat-cell *matCellDef="let row" >
+                    <input class="cantidad" #i4 type="number" value={{row.cant4}} (change)="cambio(row.fecha,i4.value,4)">
+                </td>
+            </ng-container>
+
+            <!-- menu 5 Column -->
+            <ng-container matColumnDef="menu5">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Menú vegertariano </th>
+                <td mat-cell *matCellDef="let row"> {{row.menu5}} </td>
+            </ng-container>
+
+            <!-- cantidad 5 Column -->
+            <ng-container matColumnDef="cant5">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Cantidad </th>
+                <td mat-cell *matCellDef="let row" >
+                    <input class="cantidad" #i5 type="number" value={{row.cant5}} (change)="cambio(row.fecha,i5.value,5)">
+                </td>
+            </ng-container>
+
+            <!-- Cantidad total Column -->
+            <ng-container matColumnDef="Total">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Total </th>
+                <td mat-cell *matCellDef="let row" >
+                    {{row.cant1+row.cant2+row.cant3+row.cant4+row.cant5}}
+                </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;">
+            </tr>
+        </table>
+
+        <button mat-raised-button (click)="Modificar(dataSource)" class="btnAgregar">Aceptar</button>
+
+</body>
