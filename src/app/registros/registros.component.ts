@@ -126,7 +126,13 @@ export class RegistrosComponent implements OnInit {
         this.dataSource.sort = this.sort;
       }
       else {
-        this._router.navigate(['']);
+        if (user.role == 'cliente') {
+
+        }
+        else{
+          this._router.navigate(['']);
+        }
+        
       }
 
     }

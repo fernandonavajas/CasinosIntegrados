@@ -1,16 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { User} from '../modelo/user'
 
-
-export interface Usuario {
-  rut: string;
-  nombre: string;
-  role: string;
-  empleados: number;
-
-
-}
-const restUser: Usuario[] = [
+const restUser: User[] = [
   {
     rut: '1-9',
     nombre: 'CCU',
@@ -66,8 +58,8 @@ export class LoginComponent implements OnInit {
   }
 
   navigate() {
-    var User = JSON.parse(localStorage.getItem('currentUser'));
-    if (User.role == 'admin') {
+    var user = JSON.parse(localStorage.getItem('currentUser'));
+    if (user.role == 'admin') {
       this._router.navigate(['Hadmin']);
     }
     else {

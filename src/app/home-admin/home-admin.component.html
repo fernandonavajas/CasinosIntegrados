@@ -3,7 +3,6 @@
     <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filtro">
   </mat-form-field>
 
-  <div class="mat-elevation-z8">
     <table mat-table [dataSource]="dataSource" matSort>
 
       <!-- empresa Column -->
@@ -72,6 +71,6 @@
     </table>
 
     <mat-paginator [pageSizeOptions]="[10, 25, 100]"></mat-paginator>
-  </div>
+
 
 </body>

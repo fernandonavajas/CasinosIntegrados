@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { Router } from '@angular/router';
-
+import { User } from '../modelo/user'
 @Component({
 
   selector: 'app-navbar',
@@ -14,7 +14,21 @@ export class NavbarComponent implements OnInit {
   }
 
   ngOnInit() {
+    if (localStorage.getItem("currentUser") == null) {
+      this._router.navigate(['']);
+    }
+    else {
+      var user = JSON.parse(localStorage.getItem('currentUser'));
+      if (user.role == 'admin') {
+        this.CurrentUser = user;
+      }
+      else {
+        this.CurrentUser = user;
+      }
+    }
   }
+
+  CurrentUser: User = new User();
 
   Menus() {
     this._router.navigate(['menu']);
@@ -25,13 +39,13 @@ export class NavbarComponent implements OnInit {
   Contacto() {
     this._router.navigate(['contacto']);
   }
-  Hadmin(){
+  Hadmin() {
     this._router.navigate(['Hadmin']);
   }
-  Madmin(){
+  Madmin() {
     this._router.navigate(['Madmin']);
   }
-  Cadmin(){
+  Cadmin() {
     this._router.navigate(['Cadmin']);
   }
 
