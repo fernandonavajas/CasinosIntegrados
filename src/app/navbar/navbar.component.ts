@@ -40,13 +40,13 @@ export class NavbarComponent implements OnInit {
     this._router.navigate(['contacto']);
   }
   Hadmin() {
-    this._router.navigate(['Hadmin']);
+    this._router.navigate(['hadmin']);
   }
   Madmin() {
-    this._router.navigate(['Madmin']);
+    this._router.navigate(['madmin']);
   }
   Cadmin() {
-    this._router.navigate(['Cadmin']);
+    this._router.navigate(['cadmin']);
   }
 
   LogOut() {

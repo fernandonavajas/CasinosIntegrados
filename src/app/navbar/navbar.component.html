@@ -2,14 +2,46 @@
   <mat-toolbar-row>
     <img src="../../assets/img/logo.png" class="icon">
     <p>Casinos Integrados</p>
-    <button mat-raised-button (click)="Menus()"  *ngIf="CurrentUser.role == 'cliente'" class="btnMenu ">Menus</button>
-    <button mat-raised-button (click)="Historial()" *ngIf="CurrentUser.role == 'cliente'" class="btnMenu">Historial</button>
-    <button mat-raised-button (click)="Contacto()" *ngIf="CurrentUser.role == 'cliente'" class="btnMenu">Contacto</button>
-    <button mat-raised-button (click)="Hadmin()" *ngIf="CurrentUser.role == 'admin'" class="btnMenu1">Listado de Pedidos</button>
-    <button mat-raised-button (click)="Madmin()" *ngIf="CurrentUser.role == 'admin'" class="btnMenu1">Listado de Menus</button>
-    <button mat-raised-button (click)="Cadmin()" *ngIf="CurrentUser.role == 'admin'" class="btnMenu1">Clientes</button>
+    <button  (click)="Menus()" routerLinkActive="active" *ngIf="CurrentUser.role == 'cliente'"
+      class="btn btn-primary btnMenu1 ">Menus</button>
+    <button  (click)="Historial()" routerLinkActive="active" *ngIf="CurrentUser.role == 'cliente'"
+      class="btn btn-primary btnMenu1">Historial</button>
+    <button  (click)="Contacto()" routerLinkActive="active" *ngIf="CurrentUser.role == 'cliente'"
+      class="btn btn-primary btnMenu1">Contacto</button>
+    <button  (click)="Hadmin()" routerLinkActive="active" *ngIf="CurrentUser.role == 'admin'"
+      class="btn btn-primary btnMenu1">Listado de Pedidos</button>
+    <button  (click)="Madmin()" routerLinkActive="active" *ngIf="CurrentUser.role == 'admin'"
+      class="btn btn-primary btnMenu1">Carta</button>
+    <button  (click)="Cadmin()" routerLinkActive="active" *ngIf="CurrentUser.role == 'admin'"
+      class="btn btn-primary btnMenu1">Clientes</button>
     <span class="spacer"></span>
     <button mat-raised-button (click)="LogOut()" *ngIf="CurrentUser.rut != ''" class="btnExit">Cerrar sesion</button>
 
   </mat-toolbar-row>
 </mat-toolbar>
+<!--
+<nav class="navbar navbar-expand-lg navbar-light bg-primary">
+  <a class="navbar-brand" href="#">Casinos Integrados</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText"
+    aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarText">
+    <ul class="navbar-nav ml-auto">
+      <li class="nav-item active">
+        <a class="nav-link" routerLink="/menu" routerLinkActive="active">Menus </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/historial" routerLinkActive="active">Historial</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Contacto</a>
+      </li>
+    </ul>
+    <span class="navbar-text">
+      Navbar text with an inline element
+    </span>
+  </div>
+</nav>
+
+-->

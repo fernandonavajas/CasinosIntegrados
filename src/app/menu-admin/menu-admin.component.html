@@ -13,29 +13,41 @@
       </ng-container>
 
       <!-- menu 1 Column -->
-      <ng-container matColumnDef="menu1">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> Industrias</th>
+      <ng-container matColumnDef="industrial">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Industrial</th>
         <td mat-cell *matCellDef="let row" (click)="AbrirParaEditar(row)"> {{row.menu1}} </td>
       </ng-container>
 
       <!-- menu 2 Column -->
-      <ng-container matColumnDef="menu2">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> Vegetariano </th>
+      <ng-container matColumnDef="deLaCasa">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> De la casa </th>
         <td mat-cell *matCellDef="let row" (click)="AbrirParaEditar(row)"> {{row.menu2}} </td>
       </ng-container>
 
       <!-- menu 3 Column -->
-      <ng-container matColumnDef="menu3">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> De la casa </th>
+      <ng-container matColumnDef="oficina">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Oficina </th>
         <td mat-cell *matCellDef="let row" (click)="AbrirParaEditar(row)"> {{row.menu3}} </td>
       </ng-container>
 
       <!-- menu 4 Column -->
-      <ng-container matColumnDef="menu4">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> Premium </th>
+      <ng-container matColumnDef="hipocalorico">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Hipocalorico </th>
         <td mat-cell *matCellDef="let row" (click)="AbrirParaEditar(row)"> {{row.menu4}} </td>
       </ng-container>
 
+      <!-- menu 4 Column -->
+      <ng-container matColumnDef="vegetariano">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Vegetariano </th>
+          <td mat-cell *matCellDef="let row" (click)="AbrirParaEditar(row)"> {{row.menu4}} </td>
+        </ng-container>
+
+        <!-- menu 4 Column -->
+      <ng-container matColumnDef="regimen">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Regimen </th>
+          <td mat-cell *matCellDef="let row" (click)="AbrirParaEditar(row)"> {{row.menu4}} </td>
+        </ng-container>
+  
 
 
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

@@ -60,7 +60,7 @@ export class LoginComponent implements OnInit {
   navigate() {
     var user = JSON.parse(localStorage.getItem('currentUser'));
     if (user.role == 'admin') {
-      this._router.navigate(['Hadmin']);
+      this._router.navigate(['hadmin']);
     }
     else {
       this._router.navigate(['menu']);

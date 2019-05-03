@@ -5,7 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { RouterModule, Routes } from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './material';
-import { FormsModule} from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 //componentes
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './navbar/navbar.component';
@@ -18,17 +18,11 @@ import { HomeAdminComponent } from './home-admin/home-admin.component';
 import { MenuAdminComponent } from './menu-admin/menu-admin.component';
 import { ClientesAdminComponent } from './clientes-admin/clientes-admin.component';
 
-//rutas
-const routes: Routes = [
-  { path: 'menu', component: RegistrosComponent },
-  { path: '', component: LoginComponent },
-  { path: 'registro', component: MenusComponent},
-  { path: 'historial', component: HistorialComponent},
-  { path: 'contacto', component:ContactoComponent},
-  { path: 'Hadmin', component:HomeAdminComponent},
-  { path: 'Madmin', component:MenuAdminComponent},
-  { path: 'Cadmin', component:ClientesAdminComponent},
-]
+//Services
+import { ClienteAdminService } from './clientes-admin/cliente-admin.service'
+import { HttpClientModule } from '@angular/common/http';
+import { ClienteFormComponent } from './cliente-form/cliente-form.component';
+import { MenuAdminService } from './menu-admin/menu-admin.service';
 
 
 @NgModule({
@@ -42,20 +36,21 @@ const routes: Routes = [
     HistorialComponent,
     HomeAdminComponent,
     MenuAdminComponent,
-    ClientesAdminComponent
+    ClientesAdminComponent,
+    ClienteFormComponent
   ],
   imports: [
-    RouterModule.forRoot(routes),
     BrowserModule,
     BrowserAnimationsModule,
     AppRoutingModule,
     MaterialModule,
     FormsModule,
+    HttpClientModule
   ],
-  exports:[
-    
+  exports: [
+
   ],
-  providers: [],
+  providers: [ClienteAdminService, MenuAdminService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

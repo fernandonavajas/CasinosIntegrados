@@ -18,7 +18,7 @@ var restMenus: Menus[] = [
   styleUrls: ['./menu-admin.component.css']
 })
 export class MenuAdminComponent implements OnInit {
-  displayedColumns: string[] = ['fecha', 'menu1', 'menu2','menu3', 'menu4'];
+  displayedColumns: string[] = ['fecha','industrial', 'deLaCasa', 'oficina','hipocalorico', 'vegetariano','regimen'];
   dataSource: MatTableDataSource<Menus>;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;

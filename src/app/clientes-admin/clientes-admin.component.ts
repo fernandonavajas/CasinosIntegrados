@@ -1,23 +1,10 @@
 import { Router } from '@angular/router';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
-import { FormControl } from '@angular/forms';
 import { Cliente } from '../modelo/cliente';
+import { ClienteAdminService } from './cliente-admin.service';
 
-var restCliente: Cliente[] = [
-  { id: 1, rut: '7.547.734-1', nombre: 'Baresi', cantidad: 41, },
-  { id: 2, rut: '18.990.554-8', nombre: 'Unimarc', cantidad: 72, },
-  { id: 3, rut: '19.658.990-2', nombre: 'Cencosud', cantidad: 222, },
-  { id: 3, rut: '7.547.734-1', nombre: 'lotto', cantidad: 41, },
-  { id: 4, rut: '18.990.554-8', nombre: 'ifood', cantidad: 72, },
-  { id: 5, rut: '19.658.990-2', nombre: 'falabella', cantidad: 222, },
-  { id: 6, rut: '7.547.734-1', nombre: 'soprole', cantidad: 41, },
-  { id: 7, rut: '18.990.554-8', nombre: 'redField', cantidad: 72, },
-  { id: 8, rut: '19.658.990-2', nombre: 'torre', cantidad: 222, },
-  { id: 9, rut: '7.547.734-1', nombre: 'jbl', cantidad: 41, },
-  { id: 10, rut: '18.990.554-8', nombre: 'confort', cantidad: 72, },
-  { id: 11, rut: '19.658.990-2', nombre: 'needeed', cantidad: 222, },
-];
+var restCliente: Cliente[];
 
 @Component({
   selector: 'app-clientes-admin',
@@ -25,17 +12,14 @@ var restCliente: Cliente[] = [
   styleUrls: ['./clientes-admin.component.css']
 })
 export class ClientesAdminComponent implements OnInit {
-  displayedColumns: string[] = ['rut', 'nombre', 'cantidad'];
+  displayedColumns: string[] = ['rut', 'nombre', 'empleados','correo','editar','eliminar'];
   dataSource: MatTableDataSource<Cliente>;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
-  constructor(private _router: Router) {
-    this.dataSource = new MatTableDataSource(restCliente);
-  }
-
-  ngOnInit() {
+  constructor(private _router: Router, private clienteAdminService: ClienteAdminService) {
+    
     if (localStorage.getItem("currentUser") === null) {
       this._router.navigate(['']);
     }
@@ -49,6 +33,12 @@ export class ClientesAdminComponent implements OnInit {
       }
 
     }
+    this.dataSource = new MatTableDataSource(restCliente);
+  }
+
+  ngOnInit() {
+    this.getclientes();
+    
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
   }
@@ -59,34 +49,36 @@ export class ClientesAdminComponent implements OnInit {
       this.dataSource.paginator.firstPage();
     }
   }
+
   selectedCliente: Cliente = new Cliente();
+
   public AbrirParaEditar(cliente: Cliente) {
-    //console.log(cliente);
     this.selectedCliente = cliente;
-    //console.log(this.selectedCliente);
+    console.log(this.selectedCliente);
 
   }
 
-  AgregarEditar() {
+  Eliminar(id: number){
     console.log(this.selectedCliente.id);
-    if (this.selectedCliente.id == 0) {
-      this.selectedCliente.id = restCliente.length + 1;
-      console.log('si');
-      restCliente.push(this.selectedCliente);
-      this.dataSource = new MatTableDataSource(restCliente);
-    }
-    //console.log(restCliente);
-    this.selectedCliente = new Cliente();
-  }
-  Eliminar(){
-    console.log(this.selectedCliente.id);
-    if(confirm('¿Estas seguro de eliminar a este usuario?')){
-      restCliente =restCliente.filter(x=> x != this.selectedCliente);
-      this.selectedCliente =new Cliente();
-      //console.log('eliminado');
-      //console.log(restCliente);
-      this.dataSource = new MatTableDataSource(restCliente);
-    }
+    this.clienteAdminService.EliminarCliente(id)
+    .subscribe(
+      res => {
+        this.getclientes(); // actualizar la data
+      },
+      err => console.log(err)
+    );
     
   }
+
+  getclientes(){
+    this.clienteAdminService.listarClientes()
+      .subscribe(
+        res => {
+          console.log(res)
+          this.dataSource = new MatTableDataSource(res);
+        },
+        err => console.log(err)
+      )
+  }
+
 }

@@ -13,7 +13,7 @@ import {MatExpansionModule} from '@angular/material/expansion';
 //abeja
 const modulos=[
     MatSortModule, 
-    MatInputModule, 
+    MatInputModule,
     MatPaginatorModule, 
     MatFormFieldModule,
     MatTableModule, 

@@ -152,15 +152,11 @@ export class HistorialComponent implements OnInit {
     }
     else {
       var user = JSON.parse(localStorage.getItem('currentUser'));
-      if (user.role == 'admin') {
+      
         console.log(user.role);
         console.log(restHadmin[0].fecha);
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;
-      }
-      else {
-        this._router.navigate(['']);
-      }
 
     }
 
