@@ -2,15 +2,11 @@ import { Router } from '@angular/router';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
 import { FormControl } from '@angular/forms';
+import { MenuAdminService } from './menu-admin.service';
+import { Carta } from '../modelo/carta';
 import { Menus } from '../modelo/menus';
 
-var restMenus: Menus[] = [
-  { fecha: Date.now(), menu1: 'pollo', menu2: 'zapallo italiano', menu3: 'Sopa de verduras', menu4:'pollo al jugo' },
-  { fecha: Date.now(), menu1: 'pollo', menu2: 'zapallo italiano', menu3: 'Sopa de verduras', menu4:'pollo al jugo' },
-  { fecha: Date.now(), menu1: 'pollo', menu2: 'zapallo italiano', menu3: 'Sopa de verduras', menu4:'pollo al jugo' },
-  { fecha: Date.now(), menu1: 'pollo', menu2: 'zapallo italiano', menu3: 'Sopa de verduras', menu4:'pollo al jugo' },
-
-];
+var restCarta: Menus[];
 
 @Component({
   selector: 'app-menu-admin',
@@ -18,14 +14,14 @@ var restMenus: Menus[] = [
   styleUrls: ['./menu-admin.component.css']
 })
 export class MenuAdminComponent implements OnInit {
-  displayedColumns: string[] = ['fecha','industrial', 'deLaCasa', 'oficina','hipocalorico', 'vegetariano','regimen'];
+  displayedColumns: string[] = ['fecha', 'industrial', 'deLaCasa', 'oficina', 'hipocalorico', 'vegetariano', 'regimen'];
   dataSource: MatTableDataSource<Menus>;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
-  constructor(private _router: Router) {
-    this.dataSource = new MatTableDataSource(restMenus);
+  constructor(private _router: Router, private menuAdminService: MenuAdminService) {
+    this.dataSource = new MatTableDataSource(restCarta);
   }
 
   ngOnInit() {
@@ -35,12 +31,12 @@ export class MenuAdminComponent implements OnInit {
     else {
       var user = JSON.parse(localStorage.getItem('currentUser'));
       if (user.role == 'admin') {
-        console.log(user.role);
+        this.getPlatos();
+        this.getCarta();
       }
       else {
         this._router.navigate(['']);
       }
-
     }
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
@@ -52,32 +48,100 @@ export class MenuAdminComponent implements OnInit {
       this.dataSource.paginator.firstPage();
     }
   }
-  
+
   selectedMenu: Menus = new Menus();
   public AbrirParaEditar(menu: Menus) {
     console.log(menu);
     this.selectedMenu = menu;
-    //console.log(this.selectedCliente);
 
   }
 
   AgregarEditar() {
-    if (this.selectedMenu.fecha == 0) {
-      restMenus.push(this.selectedMenu);
-      this.dataSource = new MatTableDataSource(restMenus);
-    }
-    //console.log(restMenus);
-    this.selectedMenu = new Menus();
+
   }
-  Eliminar(){
-    if(confirm('¿Estas seguro de eliminar a este usuario?')){
-      restMenus =restMenus.filter(x=> x != this.selectedMenu);
-      this.selectedMenu =new Menus();
-      //console.log('eliminado');
-      //console.log(restMenus);
-      this.dataSource = new MatTableDataSource(restMenus);
+  Eliminar() {
+    if (confirm('¿Estas seguro de eliminar a este usuario?')) {
+
     }
-    
+
+  }
+
+  getPlatos() {
+    this.menuAdminService.listarPlatos()
+      .subscribe(
+        res => {
+          console.log(res)
+        },
+        err => console.log(err)
+      )
+  }
+
+
+  convertirFecha(fecha: any): Date {
+    var date_input = new Date(fecha);
+    var day = date_input.getDate();
+    var month = date_input.getMonth() + 1;
+    var year = date_input.getFullYear();
+    var yyyy_MM_dd = year + "-" + month + "-" + day;
+    var f = new Date(yyyy_MM_dd);
+    return f;
+  }
+
+
+
+  getCarta() {
+    this.menuAdminService.listarCarta()
+      .subscribe(
+        resCarta => {
+          var i: number = 0;
+          var traspaso: Menus[] = [];
+          this.menuAdminService.listarFechas()
+            .subscribe(
+              resFechas => {
+                resCarta.forEach(element => {
+
+                  for (i = 0; i < resFechas.length; i++) {
+                    var a = this.convertirFecha(element.fecha);
+                    var b = this.convertirFecha(resFechas[i].fecha);
+                    //console.log(a.toDateString());
+                    //console.log(b.toDateString());
+                    if (a.toDateString() == b.toDateString()) {
+                      if (traspaso[i] == null) {
+                        traspaso[i] = { fecha: "", deLaCasa: "", hipocalorico: "", industrial: "", oficina: "", regimen: "", vegetariano: "" };
+                      }
+
+                      traspaso[i].fecha = element.fecha;
+                      if (element.tipomenu.id == 1) {
+                        traspaso[i].deLaCasa = element.plato.nombre;
+                      }
+                      if (element.tipomenu.id == 2) {
+                        traspaso[i].oficina = element.plato.nombre;
+                      }
+                      if (element.tipomenu.id == 3) {
+                        traspaso[i].industrial = element.plato.nombre;
+                      }
+                      if (element.tipomenu.id == 4) {
+                        traspaso[i].hipocalorico = element.plato.nombre;
+                      }
+                      if (element.tipomenu.id == 5) {
+                        traspaso[i].vegetariano = element.plato.nombre;
+                      }
+                      if (element.tipomenu.id == 6) {
+                        traspaso[i].regimen = element.plato.nombre;
+                      }
+
+                    }
+                  }
+                });
+                console.log(traspaso);
+                this.dataSource = new MatTableDataSource(traspaso);
+
+              },
+              err => console.log(err)
+            );
+
+        },
+        err => console.log(err)
+      );
   }
 }
-

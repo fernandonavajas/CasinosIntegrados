@@ -1,7 +1,9 @@
 export class Menus {
-    fecha: number = 0;
-    menu1: string;
-    menu2: string;
-    menu3: string;
-    menu4: string;
+    fecha: any;
+    industrial: string;
+    deLaCasa: string;
+    oficina: string;
+    hipocalorico: string;
+    vegetariano: string;
+    regimen: string;
 }
