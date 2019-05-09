@@ -1,8 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
 import { AppRoutingModule } from './app-routing.module';
-import { RouterModule, Routes } from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './material';
 import { FormsModule } from '@angular/forms';
@@ -17,14 +15,17 @@ import { ContactoComponent } from './contacto/contacto.component';
 import { HomeAdminComponent } from './home-admin/home-admin.component';
 import { MenuAdminComponent } from './menu-admin/menu-admin.component';
 import { ClientesAdminComponent } from './clientes-admin/clientes-admin.component';
+import { PlatoComponent } from './plato/plato.component';
+import { ClienteFormComponent } from './cliente-form/cliente-form.component';
 
 //Services
 import { ClienteAdminService } from './clientes-admin/cliente-admin.service'
 import { HttpClientModule } from '@angular/common/http';
-import { ClienteFormComponent } from './cliente-form/cliente-form.component';
 import { MenuAdminService } from './menu-admin/menu-admin.service';
 import { HistorialService } from './historial/historial.service'
 import { RegistroService } from './registros/registro.service';
+import { PlatoFormComponent } from './plato-form/plato-form.component';
+import { PlatoService } from './plato/plato.service';
 
 
 @NgModule({
@@ -39,7 +40,9 @@ import { RegistroService } from './registros/registro.service';
     HomeAdminComponent,
     MenuAdminComponent,
     ClientesAdminComponent,
-    ClienteFormComponent
+    ClienteFormComponent,
+    PlatoComponent,
+    PlatoFormComponent
   ],
   imports: [
     BrowserModule,
@@ -52,7 +55,11 @@ import { RegistroService } from './registros/registro.service';
   exports: [
 
   ],
-  providers: [ClienteAdminService, MenuAdminService, HistorialService, RegistroService],
+  providers: [ClienteAdminService,
+    MenuAdminService,
+    HistorialService,
+    RegistroService,
+    PlatoService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

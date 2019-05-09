@@ -6,7 +6,7 @@ import { DatePipe } from '@angular/common';
 import { HistorialService } from './historial.service';
 import { element } from '@angular/core/src/render3';
 
-export interface Hadmin {
+export interface Hclient {
   fecha: Date;
   industrial: string;
   deLaCasa: string;
@@ -21,7 +21,7 @@ export interface Hadmin {
   cantVegetariano: number;
   cantRegimen: number;
 }
-const restHadmin: Hadmin[] = []
+const restHadmin: Hclient[] = []
 //0: {id: "1", name: "Olivia L.", progress: "52", color: "black"},
 //1: {id: "2", name: "Levi V.", progress: "98", color: "purple"},...
 @Component({
@@ -33,7 +33,7 @@ export class HistorialComponent implements OnInit {
 
   displayedColumns: string[] = ['fecha', 'menu1', 'cant1', 'menu2', 'cant2',
     'menu3', 'cant3', 'menu4', 'cant4', 'menu5', 'cant5', 'menu6', 'cant6'];
-  dataSource: MatTableDataSource<Hadmin>;
+  dataSource: MatTableDataSource<Hclient>;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
@@ -70,7 +70,7 @@ export class HistorialComponent implements OnInit {
   }
   gethistorial(rut) {
     var fecha: any[] = [];
-    var traspaso: Hadmin[] = [];
+    var traspaso: Hclient[] = [];
     this.historailService.listarHistorial(rut)
       .subscribe(
         res => {

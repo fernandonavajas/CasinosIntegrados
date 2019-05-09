@@ -1,0 +1,68 @@
+body{
+    background: rgb(53, 189, 19);
+  background: linear-gradient(0deg, rgb(39, 189, 19) 0%, rgba(0,93,169,1) 100%);
+    background-size: cover;
+    height: 95vh;
+  }
+  table {
+      width: 100%;
+  
+    }
+  .w60{
+    width: 70%;
+    margin-left: 10%;
+    margin-right: 10%;
+  }
+    
+    .mat-form-field {
+      font-size: 14px;
+      width: 60%;
+      
+    }
+    
+    td, th {
+      width: 45%;
+    }
+    
+    .mat-header-cell, .mat-cell {
+      padding: 0 10px; 
+    }
+    
+    .header-group-row {
+      border: none;
+      align-items: stretch;
+    }
+    .header-group {
+        display: flex;
+        align-items: center;
+        border-right: 1px solid rgba(0, 0, 0, 0.12);
+        border-left: 1px solid rgba(0, 0, 0, 0.12);
+    }
+    .agregar{
+    width: 60%;
+    margin-left: 20%;
+    margin-right: 20%;
+    margin-top: 50px;
+    border-radius: 10px;
+    padding: 5px;
+    text-align: end;
+    color: aliceblue;
+    
+  }
+  mat-form-field{
+    margin-left: 7px;
+    margin-right: 7px;
+  }
+  .btnAgregar{
+    background: rgb(86, 146, 17);
+    color: aliceblue;
+    margin: 10px;
+    padding-right: 60px;
+  }
+  .btnEliminar{
+    background: rgb(214, 50, 0);
+    color: aliceblue;
+    margin: 10px;
+    padding-right: 60px;
+  }
+  

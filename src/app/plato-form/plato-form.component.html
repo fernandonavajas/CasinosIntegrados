@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+  <div class="row">
+    <div class=" col-sm-4 offset-md-4">
+      <div class="card card-body border-primary mb-3">
+        <form (submit)="edit ? actualizarPlato() : sumbitPlato()">
+          <div class="form-group">
+            <input type="text" name="nombre" [(ngModel)]="plato.nombre" class="form-control"
+              placeholder="Nombre del plato">
+          </div>
+
+          <div class="form-group">
+            <input type="text" name="descripcion" [(ngModel)]="plato.descripcion" class="form-control" placeholder="Descripcion">
+          </div>
+
+          <div class="form-group">
+            <input type="number" name="calorias" [(ngModel)]="plato.calorias" class="form-control"
+              placeholder="Calorias">
+          </div>
+
+          <div class="form-group">
+            <input type="text" name="foto" [(ngModel)]="plato.foto" class="form-control" placeholder="Foto">
+          </div>
+          <button class="btn btn-primary btn block">
+            Guardar
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+</body>
+
+</html>

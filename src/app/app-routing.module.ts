@@ -9,6 +9,8 @@ import { ContactoComponent } from './contacto/contacto.component';
 import { HomeAdminComponent } from './home-admin/home-admin.component';
 import { ClientesAdminComponent } from './clientes-admin/clientes-admin.component';
 import { MenuAdminComponent } from './menu-admin/menu-admin.component';
+import { PlatoComponent } from './plato/plato.component';
+import { PlatoFormComponent } from './plato-form/plato-form.component';
 
 const routes: Routes = [
   { path: 'cadmin/create', component: ClienteFormComponent },
@@ -20,7 +22,10 @@ const routes: Routes = [
   { path: 'contacto', component: ContactoComponent },
   { path: 'hadmin', component: HomeAdminComponent },
   { path: 'madmin', component: MenuAdminComponent },
-  { path: 'cadmin', component: ClientesAdminComponent }
+  { path: 'cadmin', component: ClientesAdminComponent },
+  { path: 'plato', component: PlatoComponent },
+  { path: 'plato/create', component: PlatoFormComponent },
+  { path: 'plato/edit/:id', component: PlatoFormComponent },
 ];
 
 @NgModule({
