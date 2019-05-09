@@ -82,9 +82,7 @@ export class MenusComponent implements OnInit {
   }
 
   ngOnInit() {
-    
-    //console.log(this.menu.value[0].dia);
-    //this.menu.valueChanges;
+
   }
 
   Si(id: string) {
@@ -105,9 +103,6 @@ export class MenusComponent implements OnInit {
 
   click(){
     //this.d0ph0.setValue('Nancy');
-
-
-
   }
   
 }

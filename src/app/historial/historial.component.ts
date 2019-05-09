@@ -3,130 +3,25 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
 import { Router } from '@angular/router';
 import { DatePipe } from '@angular/common';
+import { HistorialService } from './historial.service';
+import { element } from '@angular/core/src/render3';
 
 export interface Hadmin {
-  empresa: string;
   fecha: Date;
-  menu1: string;
-  menu2: string;
-  menu3: string;
-  menu4: string;
-  cant1: number;
-  cant2: number;
-  cant3: number;
-  cant4: number;
+  industrial: string;
+  deLaCasa: string;
+  oficina: string;
+  hipocalorico: string;
+  vegetariano: string;
+  regimen: string;
+  cantIndustrial: number;
+  cantDelaCasa: number;
+  cantOficina: number;
+  cantHipocalorico: number;
+  cantVegetariano: number;
+  cantRegimen: number;
 }
-const restHadmin: Hadmin[] = [
-  {
-    empresa: 'CCU',
-    fecha: new Date('9/9/19'),
-    menu1: 'Porotos',
-    menu2: 'Cazuela de ave',
-    menu3: 'garbanzos',
-    menu4: 'pollo con papas fritas',
-    cant1: 31,
-    cant2: 12,
-    cant3: 2,
-    cant4: 41,
-  },
-  {
-    empresa: 'Cocacola',
-    fecha: new Date('8/9/19'),
-    menu1: 'Porotos',
-    menu2: 'Cazuela de ave',
-    menu3: 'garbanzos',
-    menu4: 'pollo con papas fritas',
-    cant1: 81,
-    cant2: 72,
-    cant3: 33,
-    cant4: 11,
-  },
-  {
-    empresa: 'P&G',
-    fecha: new Date('7/9/19'),
-    menu1: 'Porotos',
-    menu2: 'Cazuela de ave',
-    menu3: 'garbanzos',
-    menu4: 'pollo con papas fritas',
-    cant1: 33,
-    cant2: 22,
-    cant3: 21,
-    cant4: 21,
-  },
-  {
-    empresa: 'CCU',
-    fecha: new Date('6/9/19'),
-    menu1: 'Porotos',
-    menu2: 'Cazuela de ave',
-    menu3: 'garbanzos',
-    menu4: 'pollo con papas fritas',
-    cant1: 31,
-    cant2: 12,
-    cant3: 2,
-    cant4: 41,
-  },
-  {
-    empresa: 'Cocacola',
-    fecha: new Date('5/9/19'),
-    menu1: 'Porotos',
-    menu2: 'Cazuela de ave',
-    menu3: 'garbanzos',
-    menu4: 'pollo con papas fritas',
-    cant1: 81,
-    cant2: 72,
-    cant3: 33,
-    cant4: 11,
-  },
-  {
-    empresa: 'P&G',
-    fecha: new Date('4/9/19'),
-    menu1: 'Porotos',
-    menu2: 'Cazuela de ave',
-    menu3: 'garbanzos',
-    menu4: 'pollo con papas fritas',
-    cant1: 33,
-    cant2: 22,
-    cant3: 21,
-    cant4: 21,
-  },
-  {
-    empresa: 'CCU',
-    fecha: new Date('3/9/19'),
-    menu1: 'Porotos',
-    menu2: 'Cazuela de ave',
-    menu3: 'garbanzos',
-    menu4: 'pollo con papas fritas',
-    cant1: 31,
-    cant2: 12,
-    cant3: 2,
-    cant4: 41,
-  },
-  {
-    empresa: 'Cocacola',
-    fecha: new Date('2/9/19'),
-    menu1: 'Porotos',
-    menu2: 'Cazuela de ave',
-    menu3: 'garbanzos',
-    menu4: 'pollo con papas fritas',
-    cant1: 81,
-    cant2: 72,
-    cant3: 33,
-    cant4: 11,
-  },
-  {
-    empresa: 'P&G',
-    fecha: new Date('1/9/19'),
-    menu1: 'Porotos',
-    menu2: 'Cazuela de ave',
-    menu3: 'garbanzos',
-    menu4: 'pollo con papas fritas',
-    cant1: 13,
-    cant2: 22,
-    cant3: 21,
-    cant4: 21,
-  },
-  
-]
+const restHadmin: Hadmin[] = []
 //0: {id: "1", name: "Olivia L.", progress: "52", color: "black"},
 //1: {id: "2", name: "Levi V.", progress: "98", color: "purple"},...
 @Component({
@@ -136,13 +31,14 @@ const restHadmin: Hadmin[] = [
 })
 export class HistorialComponent implements OnInit {
 
-  displayedColumns: string[] = ['fecha', 'menu1','cant1', 'menu2','cant2', 'menu3','cant3','menu4','cant4'];
+  displayedColumns: string[] = ['fecha', 'menu1', 'cant1', 'menu2', 'cant2',
+    'menu3', 'cant3', 'menu4', 'cant4', 'menu5', 'cant5', 'menu6', 'cant6'];
   dataSource: MatTableDataSource<Hadmin>;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
-  constructor(private _router: Router) {
+  constructor(private _router: Router, private historailService: HistorialService) {
     this.dataSource = new MatTableDataSource(restHadmin);
   }
 
@@ -152,27 +48,81 @@ export class HistorialComponent implements OnInit {
     }
     else {
       var user = JSON.parse(localStorage.getItem('currentUser'));
-      
-        console.log(user.role);
-        console.log(restHadmin[0].fecha);
-        this.dataSource.paginator = this.paginator;
-        this.dataSource.sort = this.sort;
+      this.gethistorial('18990554');
+
+      this.dataSource.paginator = this.paginator;
+      this.dataSource.sort = this.sort;
 
     }
 
   }
   applyFilter(filterValue: string) {
-    
-    if(filterValue=='9/9/19')
-    {
-      var a=new Date('9/9/19')
-      var b=a.toUTCString();
+
+    if (filterValue == '9/9/19') {
+      var a = new Date('9/9/19')
+      var b = a.toUTCString();
       console.log(b);
     }
     this.dataSource.filter = filterValue.trim().toLowerCase();
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage();
     }
+  }
+  gethistorial(rut) {
+    var fecha: any[] = [];
+    var traspaso: Hadmin[] = [];
+    this.historailService.listarHistorial(rut)
+      .subscribe(
+        res => {
+          res.forEach(element => {
+            if (!fecha.includes(element.carta.fecha)) {
+              traspaso[fecha.length] = {
+
+                fecha: new Date(), industrial: '',
+                deLaCasa: '', oficina: '', hipocalorico: '',
+                vegetariano: '', regimen: '',
+                cantDelaCasa: 0, cantHipocalorico: 0, cantIndustrial: 0,
+                cantOficina: 0, cantRegimen: 0, cantVegetariano: 0
+              }
+
+              traspaso[fecha.length].fecha = element.carta.fecha;
+              fecha.push(element.carta.fecha);
+            }
+            for (var i = 0; i < traspaso.length; i++) {
+              if (traspaso[i].fecha == element.carta.fecha) {
+                if (element.carta.tipomenu.id == 1) {
+                  traspaso[i].deLaCasa = element.carta.plato.nombre;
+                  traspaso[i].cantDelaCasa = element.cantidad;
+                }
+                if (element.carta.tipomenu.id == 2) {
+                  traspaso[i].oficina = element.carta.plato.nombre;
+                  traspaso[i].cantOficina = element.cantidad;
+                }
+                if (element.carta.tipomenu.id == 3) {
+                  traspaso[i].industrial = element.carta.plato.nombre;
+                  traspaso[i].cantIndustrial = element.cantidad;
+                }
+                if (element.carta.tipomenu.id == 4) {
+                  traspaso[i].hipocalorico = element.carta.plato.nombre;
+                  traspaso[i].cantHipocalorico = element.cantidad;
+                }
+                if (element.carta.tipomenu.id == 5) {
+                  traspaso[i].vegetariano = element.carta.plato.nombre;
+                  traspaso[i].cantVegetariano = element.cantidad;
+                }
+                if (element.carta.tipomenu.id == 6) {
+                  traspaso[i].regimen = element.carta.plato.nombre;
+                  traspaso[i].cantRegimen = element.cantidad;
+                }
+              }
+            }
+
+          });
+          console.log(traspaso)
+          this.dataSource = new MatTableDataSource(traspaso);
+        },
+        err => console.log(err)
+      )
   }
 
 }

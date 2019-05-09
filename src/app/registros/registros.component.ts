@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatSort, MatTableDataSource } from '@angular/material';
 import { Router } from '@angular/router';
 import { DataSource } from '@angular/cdk/table';
+import { RegistroService } from './registro.service';
 
 export class Menu2 {
   fecha: Date;
@@ -111,7 +112,7 @@ export class RegistrosComponent implements OnInit {
 
   @ViewChild(MatSort) sort: MatSort;
 
-  constructor(private _router: Router) {
+  constructor(private _router: Router, private registroService: RegistroService) {
     this.dataSource = new MatTableDataSource(restMenu2);
   }
 
@@ -127,7 +128,7 @@ export class RegistrosComponent implements OnInit {
       }
       else {
         if (user.role == 'cliente') {
-
+          this.getRegistro('18990554');
         }
         else{
           this._router.navigate(['']);
@@ -191,6 +192,16 @@ export class RegistrosComponent implements OnInit {
     console.log(menu2.data);
     if(confirm('Datos guardados con exito')){
     }
+  }
+
+  getRegistro(rut) {
+    this.registroService.listarRegistro(rut)
+      .subscribe(
+        res => {
+          console.log(res)
+        },
+        err => console.log(err)
+      )
   }
 
 }

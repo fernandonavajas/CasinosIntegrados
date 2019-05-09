@@ -3,6 +3,7 @@ body{
   background: linear-gradient(0deg, rgba(177,110,175,1) 0%, rgba(0,93,169,1) 100%);
   background-size: cover;
   height: 95vh;
+  width: 100vw;
 }
 table {
   width: 100%;
@@ -21,7 +22,7 @@ margin-right: 5%;
 }
 
 td, th {
-  width: 15%;
+  width: 13%;
   font-size: 16px;
 }
 

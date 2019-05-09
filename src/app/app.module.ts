@@ -23,6 +23,8 @@ import { ClienteAdminService } from './clientes-admin/cliente-admin.service'
 import { HttpClientModule } from '@angular/common/http';
 import { ClienteFormComponent } from './cliente-form/cliente-form.component';
 import { MenuAdminService } from './menu-admin/menu-admin.service';
+import { HistorialService } from './historial/historial.service'
+import { RegistroService } from './registros/registro.service';
 
 
 @NgModule({
@@ -50,7 +52,7 @@ import { MenuAdminService } from './menu-admin/menu-admin.service';
   exports: [
 
   ],
-  providers: [ClienteAdminService, MenuAdminService],
+  providers: [ClienteAdminService, MenuAdminService, HistorialService, RegistroService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
