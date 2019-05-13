@@ -11,9 +11,6 @@ export class NavbarComponent implements OnInit {
 
 
   constructor(private _router: Router) {
-  }
-
-  ngOnInit() {
     if (localStorage.getItem("currentUser") == null) {
       this._router.navigate(['']);
     }
@@ -28,8 +25,10 @@ export class NavbarComponent implements OnInit {
     }
   }
 
+  ngOnInit() {
+    
+  }
   CurrentUser: User = new User();
-
   Menus() {
     this._router.navigate(['menu']);
   }

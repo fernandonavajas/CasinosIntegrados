@@ -27,6 +27,19 @@ export class PlatoFormComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    const params = this.ActivateRoute.snapshot.params;
+    console.log(params);
+    if (params.id != 0) {
+      this.platoService.seleccionarPlato(params.id)
+        .subscribe(
+          res => {
+            console.log(res);
+            this.plato = res;
+            this.edit = true;
+          },
+          err => console.log(err)
+        )
+    }
   }
 
   sumbiPlato() {

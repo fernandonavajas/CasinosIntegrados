@@ -1,0 +1,20 @@
+.btnMenu{
+
+    margin: 10px;
+    color: aliceblue;
+    background: rgb(56, 68, 168);
+  }
+  .bg{
+    background: #005DA9;
+    color: aliceblue;
+}
+.btnExit{
+    background: #D68500;
+    color: aliceblue;
+    margin: 10px;
+}
+
+.navbar{
+    padding: 0;
+    margin: 0;
+}

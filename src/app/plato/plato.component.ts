@@ -14,7 +14,7 @@ var resPlatos: Platos[];
   styleUrls: ['./plato.component.css']
 })
 export class PlatoComponent implements OnInit {
-  displayedColumns: string[] = ['rut', 'nombre', 'empleados', 'correo', 'editar', 'eliminar'];
+  displayedColumns: string[] = ['nombre', 'descripcion', 'foto', 'calorias', 'editar', 'eliminar'];
   dataSource: MatTableDataSource<Platos>;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;

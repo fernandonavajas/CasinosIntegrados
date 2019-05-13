@@ -20,8 +20,18 @@ body{
       
     }
     
-    td, th {
+    /*td, th {
       width: 45%;
+    }*/
+    .descripcion{
+      width: 30%;
+    }
+    .nombre{
+      width: 20%;
+    }
+    img{
+      height:100px;
+      width:100px;
     }
     
     .mat-header-cell, .mat-cell {

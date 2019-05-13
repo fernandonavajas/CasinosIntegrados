@@ -19,7 +19,7 @@
           </div>
 
           <div class="form-group">
-            <input type="text" name="descripcion" [(ngModel)]="plato.descripcion" class="form-control" placeholder="Descripcion">
+            <textarea rows="3" maxlength="400" name="descripcion" [(ngModel)]="plato.descripcion" class="form-control" placeholder="Descripcion"></textarea>
           </div>
 
           <div class="form-group">
@@ -28,7 +28,10 @@
           </div>
 
           <div class="form-group">
-            <input type="text" name="foto" [(ngModel)]="plato.foto" class="form-control" placeholder="Foto">
+            <input type="text"  name="foto" [(ngModel)]="plato.foto" class="form-control" placeholder="Foto">
+          </div>
+          <div class="form-group">
+            <img src={{plato.foto}}>
           </div>
           <button class="btn btn-primary btn block">
             Guardar
@@ -37,7 +40,7 @@
       </div>
     </div>
   </div>
-
+  
 </body>
 
 </html>

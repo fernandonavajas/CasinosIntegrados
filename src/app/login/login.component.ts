@@ -1,28 +1,17 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { User} from '../modelo/user'
+import { User } from '../modelo/user'
+import { NavbarService } from '../navbar/navbar.service';
+import { LoginService } from './login.service';
 
-const restUser: User[] = [
+const rutUsuario = '';
+const restUser: User = 
   {
-    rut: '1-9',
+    rut: '1-8',
     nombre: 'CCU',
     role: 'cliente',
     empleados: 22,
-  },
-  {
-    rut: '1-7',
-    nombre: 'coca-cola',
-    role: 'cliente',
-    empleados: 55,
-  },
-  {
-    rut: '1-8',
-    nombre: 'casino integrado',
-    role: 'admin',
-    empleados: 0,
-  },
-]
-
+  };
 
 @Component({
   selector: 'app-login',
@@ -31,7 +20,12 @@ const restUser: User[] = [
 })
 export class LoginComponent implements OnInit {
 
-  constructor(private _router: Router) {
+  isLoggedIn = false;
+  role = '';
+
+  constructor(private _router: Router, private navBarService: NavbarService, private loginService: LoginService) {
+    this.navBarService.getLoginStatus().subscribe(status => this.isLoggedIn = status);
+
   }
 
   ngOnInit() {
@@ -42,20 +36,36 @@ export class LoginComponent implements OnInit {
   }
 
   logIn(rut: string, password: string, event: Event) {
-    
+
     console.log(rut);
     console.log(password);
+    this.loginService.loggin(rut,password)
+    .subscribe(
+      res =>{
+        console.log(res);
+      },
+      err =>{
+        console.log(err);
+      }
+    );
 
-    if (rut == restUser[2].rut) {
-      localStorage.setItem('currentUser', JSON.stringify(restUser[2]));//ingresar como admin
+    if (restUser.role=='admin') {
+      localStorage.setItem('currentUser', JSON.stringify(restUser));//ingresar como admin
+      this.navBarService.updateNavAfterAuth('admin');
+      this.navBarService.updateLoginStatus(true);
+      this.role = 'admin';
     }
     else {
-      localStorage.setItem('currentUser', JSON.stringify(restUser[1]));// ingresar como cliente
+      localStorage.setItem('currentUser', JSON.stringify(restUser));// ingresar como cliente
+      this.navBarService.updateNavAfterAuth('cliente');
+      this.navBarService.updateLoginStatus(true);
+      this.role = 'cliente';
     }
-    
+
     this.navigate();
 
   }
+
 
   navigate() {
     var user = JSON.parse(localStorage.getItem('currentUser'));

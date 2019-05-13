@@ -1,2 +1,29 @@
+ <nav class="navbar bg">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" style="color:aliceblue; cursor:pointer" (click)="logout()">Casinos Integrados</a>
+        </div>
+        <ul class="nav navbar-nav" routerLinkActive="active">
+            <!--<li class="nav-item"><a class="nav-link" routerLink="">Home</a></li>-->
+            <li class="nav-item" *ngFor="let link of links">
+                <!-- <a class="nav-link" [routerLink]="link.path">{{ link.text }}</a>-->
+                <!--Listar los botones del navgador-->
+                <button class="btn btn prymary btnMenu" [routerLink]="link.path">{{link.text }} </button>
+            </li>
+            <li class="nav-item" *ngIf="isLoggedIn">
+                <!--<a class="nav-link btnExit" routerLink="logout" (click)="logout()">Logout</a>-->
+                <button class="btn btn prymary btnExit" (click)="logout()">Cerrar sesión </button>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+<router-outlet></router-outlet>
+
+<!--
 <app-navbar></app-navbar>
 <router-outlet></router-outlet>
+
+<button  (click)="Menus()" routerLinkActive="active" *ngIf="CurrentUser.role == 'cliente'"
+      class="btn btn-primary btnMenu1 ">Registro de Menus</button>
+-->

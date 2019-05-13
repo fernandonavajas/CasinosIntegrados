@@ -1,11 +1,15 @@
 body{
-  background: #085078;  /* fallback for old browsers */
-  background: -webkit-linear-gradient(to left, #85D8CE, #085078);  /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(to left, #85D8CE, #085078); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-  background-size: cover;
+  background: rgb(0,93,169);
+background: linear-gradient(174deg, rgba(0,93,169,1) 0%, rgba(0,169,161,0.938813025210084) 84%);
+background-size: cover;
   height: 100vh;
 }
 
+
+input{
+  text-align: center;
+  
+}
 table {
     width:95%;
     margin-left: 2.5%;
@@ -15,13 +19,18 @@ table {
   
   .mat-form-field {
     font-size: 15px;
+    font-weight: bold;
     width: 80%;
     margin-left: 10%;
     margin-right: 10%;
+    color: azure;
+    text-align: left;
   }
-  
-  td, th {
-    width: 9%;
+  th {
+    font-size: 14px;
+    font-family: sans-serif;
+  }
+  td {
     font-size: 12px;
     font-family: sans-serif;
   }
@@ -40,10 +49,12 @@ table {
       border-right: 1px solid rgba(0, 0, 0, 0.12);
       border-left: 1px solid rgba(0, 0, 0, 0.12);
   }
-  td{
-    
-  }
-
+.espacioChico{
+  width: 1%;
+}
+.espacioMediano{
+  width: 15%;
+}
 .cantidad{
   width: 50px;
   border-width: 1px;
@@ -56,4 +67,33 @@ table {
     margin-top: 10px;
     margin-left: 89%;
     }
+
+.onHover{
+
+}
+img{
+  -webkit-animation: fadein 0.6s linear 1 normal forwards;
+  display: none;
   
+}
+@-webkit-keyframes fadein{
+  from{
+    opacity: 0;
+  }
+  to{
+    opacity: 1;
+  }
+}
+
+.onHover:hover img{
+
+  display: block;
+  position: absolute;
+  z-index: 10;
+  border-radius: 5%;
+  padding: 5px 0;
+  height: 300px;
+  width: 300px;
+  margin-left: 90px;
+  margin-top: -150px;
+}

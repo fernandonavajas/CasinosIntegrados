@@ -4,6 +4,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './material';
 import { FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 //componentes
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './navbar/navbar.component';
@@ -17,15 +18,15 @@ import { MenuAdminComponent } from './menu-admin/menu-admin.component';
 import { ClientesAdminComponent } from './clientes-admin/clientes-admin.component';
 import { PlatoComponent } from './plato/plato.component';
 import { ClienteFormComponent } from './cliente-form/cliente-form.component';
-
 //Services
 import { ClienteAdminService } from './clientes-admin/cliente-admin.service'
-import { HttpClientModule } from '@angular/common/http';
 import { MenuAdminService } from './menu-admin/menu-admin.service';
 import { HistorialService } from './historial/historial.service'
 import { RegistroService } from './registros/registro.service';
 import { PlatoFormComponent } from './plato-form/plato-form.component';
 import { PlatoService } from './plato/plato.service';
+import { NavbarService } from './navbar/navbar.service';
+import { LoginService } from './login/login.service';
 
 
 @NgModule({
@@ -55,11 +56,21 @@ import { PlatoService } from './plato/plato.service';
   exports: [
 
   ],
+  entryComponents: [
+    LoginComponent,
+    HomeAdminComponent,
+    ClientesAdminComponent,
+    MenuAdminComponent
+
+  ],
   providers: [ClienteAdminService,
     MenuAdminService,
     HistorialService,
     RegistroService,
-    PlatoService],
+    PlatoService,
+    NavbarService,
+    LoginService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -16,6 +16,12 @@ export class Menu2 {
   cant3: number;
   cant4: number;
   cant5: number;
+  foto1: string;
+  foto2: string;
+  foto3: string;
+  foto4: string;
+  foto5: string;
+
 }
 var restMenu2: Menu2[] = [
   {
@@ -30,71 +36,31 @@ var restMenu2: Menu2[] = [
     cant3: 32,
     cant4: 41,
     cant5: 12,
+    foto1: "http://milrecetas.net/wp-content/uploads/2015/05/Carne-al-Jugo-2.jpg",
+    foto2: "https://www.gourmet.cl/wp-content/uploads/2014/12/Garbanzos.jpg",
+    foto3: "http://turismogastronómico.com/wp-content/uploads/2018/05/casado.png",
+    foto4: "",
+    foto5: "",
+
   },
   {
-    fecha: new Date('2/4/19'),
-    menu1: 'Lentejas a la parmesana con longaniza',
-    menu2: 'Goulash de vacuno con arroz exótico',
-    menu3: 'Pavo al romero con corbatas atomatadas',
-    menu4: 'Omelette a la jardinera con ensaladas',
-    menu5: 'Budin tricolor con verduras salteadas',
-    cant1: 11,
-    cant2: 2,
-    cant3: 42,
-    cant4: 4,
-    cant5: 2,
-  },
-  {
-    fecha: new Date('3/4/19'),
-    menu1: 'Pantrucas',
-    menu2: 'Hamburguesa atomatada con espirales',
-    menu3: 'Carne al jugo con puré',
-    menu4: 'Salpicón de pollo',
-    menu5: 'Carbonada de verduras con huevo',
-    cant1: 31,
-    cant2: 12,
-    cant3: 16,
-    cant4: 41,
-    cant5: 23,
-  },
-  {
-    fecha: new Date('4/4/19'),
+    fecha: new Date('1/4/19'),
     menu1: 'Ajiaco',
     menu2: 'Pollo a la provenzal con papas asadas',
     menu3: 'Lomo de cerdo con arroz',
     menu4: 'Tortilla de acelga con ensaladas',
     menu5: 'Hamburguesa de soya con verduras asadas',
-    cant1: 65,
-    cant2: 34,
-    cant3: 38,
-    cant4: 81,
-    cant5: 2,
-  },
-  {
-    fecha: new Date('5/4/19'),
-    menu1: 'Lentejas a la parmesana con longaniza',
-    menu2: 'Goulash de vacuno con arroz exótico',
-    menu3: 'Pavo al romero con corbatas atomatadas',
-    menu4: 'Omelette a la jardinera con ensaladas',
-    menu5: 'Budin tricolor con verduras salteadas',
-    cant1: 19,
-    cant2: 22,
-    cant3: 49,
-    cant4: 14,
-    cant5: 19,
-  },
-  {
-    fecha: new Date('6/4/19'),
-    menu1: 'Pantrucas',
-    menu2: 'Hamburguesa atomatada con espirales',
-    menu3: 'Carne al jugo con puré',
-    menu4: 'Salpicón de pollo',
-    menu5: 'Carbonada de verduras con huevo',
-    cant1: 54,
-    cant2: 17,
-    cant3: 22,
-    cant4: 14,
-    cant5: 37,
+    cant1: 61,
+    cant2: 12,
+    cant3: 32,
+    cant4: 41,
+    cant5: 12,
+    foto1: "http://turismogastronómico.com/wp-content/uploads/2018/05/casado.png",
+    foto2: "https://www.gourmet.cl/wp-content/uploads/2014/12/Garbanzos.jpg",
+    foto3: "http://turismogastronómico.com/wp-content/uploads/2018/05/casado.png",
+    foto4: "",
+    foto5: "",
+
   },
 
 ]
@@ -130,10 +96,10 @@ export class RegistrosComponent implements OnInit {
         if (user.role == 'cliente') {
           this.getRegistro('18990554');
         }
-        else{
+        else {
           this._router.navigate(['']);
         }
-        
+
       }
 
     }
@@ -148,6 +114,17 @@ export class RegistrosComponent implements OnInit {
     }
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
+
+
+
+  /*selectedRow: Menu2 = new Menu2();
+
+  public AbrirParaEditar(Menu2: Menu2, nFila: number) {
+    this.selectedRow = Menu2;
+    var link = '';
+    console.log(this.selectedRow, nFila);
+
+  }*/
 
   selectedMenu: Menu2[];
 
@@ -190,7 +167,7 @@ export class RegistrosComponent implements OnInit {
 
   Modificar(menu2: any) {
     console.log(menu2.data);
-    if(confirm('Datos guardados con exito')){
+    if (confirm('Datos guardados con exito')) {
     }
   }
 

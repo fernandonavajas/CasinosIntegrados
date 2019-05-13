@@ -1,11 +1,8 @@
 import { Router } from '@angular/router';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
-import { FormControl } from '@angular/forms';
 import { MenuAdminService } from './menu-admin.service';
-import { Carta } from '../modelo/carta';
 import { Menus } from '../modelo/menus';
-
 var restCarta: Menus[];
 
 @Component({

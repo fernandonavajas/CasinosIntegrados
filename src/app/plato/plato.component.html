@@ -17,38 +17,39 @@
     <table mat-table [dataSource]="dataSource" matSort>
 
       <!-- Rut Column -->
-      <ng-container matColumnDef="rut">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> Nombre </th>
-        <td mat-cell *matCellDef="let row" (click)="AbrirParaEditar(row)"> {{row.nombre}} </td>
+      <ng-container matColumnDef="nombre">
+        <th class="nombre" mat-header-cell *matHeaderCellDef mat-sort-header> Nombre </th>
+        <td class="nombre"mat-cell *matCellDef="let row" (click)="AbrirParaEditar(row)"> {{row.nombre}} </td>
       </ng-container>
 
       <!-- Nombre Column -->
-      <ng-container matColumnDef="nombre">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> Descripion </th>
-        <td mat-cell *matCellDef="let row" (click)="AbrirParaEditar(row)"> {{row.descripcion}} </td>
+      <ng-container matColumnDef="descripcion">
+        <th  class="descripcion" mat-header-cell *matHeaderCellDef mat-sort-header> Descripion </th>
+        <td  class="descripcion" mat-cell *matCellDef="let row" (click)="AbrirParaEditar(row)"> {{row.descripcion}} </td>
       </ng-container>
 
       <!-- Cantidad Column -->
-      <ng-container matColumnDef="empleados">
+      <ng-container matColumnDef="foto">
         <th mat-header-cell *matHeaderCellDef mat-sort-header>Foto </th>
-        <td mat-cell *matCellDef="let row" (click)="AbrirParaEditar(row)"> {{row.foto}} </td>
+        <td mat-cell *matCellDef="let row" (click)="AbrirParaEditar(row)"><img src={{row.foto}}></td>
+
       </ng-container>
 
       <!-- Correo Column -->
-      <ng-container matColumnDef="correo">
+      <ng-container matColumnDef="calorias">
         <th mat-header-cell *matHeaderCellDef mat-sort-header> Calorias </th>
-        <td mat-cell *matCellDef="let row" (click)="AbrirParaEditar(row)"> {{row.calorias}} </td>
+        <td mat-cell *matCellDef="let row" (click)="AbrirParaEditar(row)"> {{row.calorias}} Kcal. </td>
       </ng-container>
-      <!-- Modificar Column -->
+      <!-- Eliminar Column -->
       <ng-container matColumnDef="eliminar">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header>  </th>
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> </th>
         <td mat-cell *matCellDef="let row" (click)="AbrirParaEditar(row)">
           <button mat-raised-button (click)="Eliminar(selectedPlato.id)" class="btn btn-danger">Eliminar</button>
         </td>
       </ng-container>
-      <!-- Eliminar Column -->
+      <!-- Modificar Column -->
       <ng-container matColumnDef="editar">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header>  </th>
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> </th>
         <td mat-cell *matCellDef="let row" (click)="AbrirParaEditar(row)">
           <button mat-raised-button [routerLink]="['/plato/edit',row.id]" class="btn btn-primary">Editar</button> </td>
       </ng-container>

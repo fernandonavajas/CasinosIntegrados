@@ -20,6 +20,9 @@ export class PlatoService {
     return this.http.get<Platos[]>(`${this.BASE_URL}/plato`, { headers });
 
   }
+  seleccionarPlato(id): Observable<Platos> {
+    return this.http.get<Platos>(`${this.BASE_URL}/plato/${id}`, { headers })
+  }
   crearPlato(plato) {
     return this.http.post<Platos>(`${this.BASE_URL}/plato`,plato)
   }
