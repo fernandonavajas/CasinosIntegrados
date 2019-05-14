@@ -9,6 +9,7 @@ import {MatInputModule} from '@angular/material/input';
 import {MatSortModule} from '@angular/material/sort';
 import { NgModule } from '@angular/core';
 import {MatExpansionModule} from '@angular/material/expansion';
+import {MatDialogModule} from '@angular/material/dialog';
 
 //abeja
 const modulos=[
@@ -21,7 +22,8 @@ const modulos=[
     MatCheckboxModule, 
     MatToolbarModule, 
     MatIconModule,
-    MatExpansionModule
+    MatExpansionModule,
+    MatDialogModule
 
 ]
 

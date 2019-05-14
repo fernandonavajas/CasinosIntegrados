@@ -20,9 +20,9 @@ table {
     
   }
   
-  td, th {
+  /*td, th {
     width: 17%;
-  }
+  }*/
   
   .mat-header-cell, .mat-cell {
     padding: 0 10px; 

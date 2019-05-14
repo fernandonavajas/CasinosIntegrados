@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpHeaders, HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { Pedido } from '../modelo/pedido';
+import { Carta } from '../modelo/carta';
 
 
 @Injectable({
@@ -11,11 +13,37 @@ export class RegistroService {
   BASE_URL: string = 'http://localhost:3000';
   constructor(private http: HttpClient) { }
 
-  listarRegistro(rut:string): Observable<any[]> {
+  listarRegistro(rut: string): Observable<any[]> {
     const headers = new HttpHeaders({
       "Content-Type": "*/*",
       "rut": rut
     })
     return this.http.get<any[]>(`${this.BASE_URL}/pedidos`, { headers });
   }
+  listarCarta(): Observable<Carta[]> {
+    const headers = new HttpHeaders({
+      "Content-Type": "*/*",
+    })
+    return this.http.get<Carta[]>(`${this.BASE_URL}/carta`, { headers });
+  }
+  listarFechas(): Observable<any[]> {
+    const headers = new HttpHeaders({
+      "Content-Type": "*/*",
+    })
+    return this.http.get<any[]>(`${this.BASE_URL}/carta/fechas`, { headers });
+  }
+
+  submitPedido(rut: number, idUsuario: number): Observable<any> {
+    var pedido = {
+      rut: rut,
+      fecha: new Date(),
+      usuarioId: idUsuario
+    }
+    console.log(pedido);
+    const headers = new HttpHeaders({
+      "Content-Type": "*/*"
+    })
+    return this.http.post<any>(`${this.BASE_URL}/pedidos`, pedido);
+  }
+
 }

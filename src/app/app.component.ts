@@ -19,6 +19,7 @@ export class AppComponent /*implements OnInit*/ {
     this.navBarService.getLoginStatus().subscribe(status => this.isLoggedIn = status);
   }
   logout() {
+    localStorage.removeItem("currentUser");
     this.navBarService.updateLoginStatus(false);
     this.router.navigate(['/']);
   }

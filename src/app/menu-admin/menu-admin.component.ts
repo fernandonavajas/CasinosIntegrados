@@ -27,7 +27,7 @@ export class MenuAdminComponent implements OnInit {
     }
     else {
       var user = JSON.parse(localStorage.getItem('currentUser'));
-      if (user.role == 'admin') {
+      if (user.tokens[0].rol == 'admin') {
         this.getPlatos();
         this.getCarta();
       }
@@ -40,7 +40,7 @@ export class MenuAdminComponent implements OnInit {
   }
   applyFilter(filterValue: string) {
     this.dataSource.filter = filterValue.trim().toLowerCase();
-    console.log(this.dataSource.filteredData);
+    //console.log(this.dataSource.filteredData);
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage();
     }
@@ -48,7 +48,7 @@ export class MenuAdminComponent implements OnInit {
 
   selectedMenu: Menus = new Menus();
   public AbrirParaEditar(menu: Menus) {
-    console.log(menu);
+    //console.log(menu);
     this.selectedMenu = menu;
 
   }
@@ -67,7 +67,7 @@ export class MenuAdminComponent implements OnInit {
     this.menuAdminService.listarPlatos()
       .subscribe(
         res => {
-          console.log(res)
+          //console.log(res)
         },
         err => console.log(err)
       )
@@ -130,7 +130,7 @@ export class MenuAdminComponent implements OnInit {
                     }
                   }
                 });
-                console.log(traspaso);
+                //console.log(traspaso);
                 this.dataSource = new MatTableDataSource(traspaso);
 
               },

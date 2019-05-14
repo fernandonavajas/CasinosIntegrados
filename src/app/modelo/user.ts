@@ -1,6 +1,8 @@
+import { Tokens } from './userTokens';
+
 export class User {
     rut: string='';
     nombre: string;
-    role: string;
-    empleados: number;
-}
+    tokens: Tokens        
+    }
+    

@@ -15,7 +15,7 @@ import { RegistrosComponent } from './registros/registros.component';
 import { ContactoComponent } from './contacto/contacto.component';
 import { HomeAdminComponent } from './home-admin/home-admin.component';
 import { MenuAdminComponent } from './menu-admin/menu-admin.component';
-import { ClientesAdminComponent } from './clientes-admin/clientes-admin.component';
+import { ClientesAdminComponent, classModal } from './clientes-admin/clientes-admin.component';
 import { PlatoComponent } from './plato/plato.component';
 import { ClienteFormComponent } from './cliente-form/cliente-form.component';
 //Services
@@ -43,7 +43,8 @@ import { LoginService } from './login/login.service';
     ClientesAdminComponent,
     ClienteFormComponent,
     PlatoComponent,
-    PlatoFormComponent
+    PlatoFormComponent,
+    classModal
   ],
   imports: [
     BrowserModule,
@@ -60,7 +61,8 @@ import { LoginService } from './login/login.service';
     LoginComponent,
     HomeAdminComponent,
     ClientesAdminComponent,
-    MenuAdminComponent
+    MenuAdminComponent,
+    classModal
 
   ],
   providers: [ClienteAdminService,

@@ -48,6 +48,8 @@ export class ClienteFormComponent implements OnInit {
     this.clienteAdminService.crearCliente(this.cliente)
       .subscribe(
         res => {
+          this.clienteAdminService.CambiarPassword(this.cliente.rut,"2019")
+          .subscribe();
           console.log(res);
           this.router.navigate(['/cadmin']);
         },

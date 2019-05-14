@@ -39,14 +39,23 @@
         <th mat-header-cell *matHeaderCellDef mat-sort-header> Correo </th>
         <td mat-cell *matCellDef="let row" (click)="AbrirParaEditar(row)"> {{row.correo}} </td>
       </ng-container>
-      <!-- Modificar Column -->
+
+      <!-- Cambiar contraseña Column -->
+      <ng-container matColumnDef="cambiarpassword">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> </th>
+        <td mat-cell *matCellDef="let row" (click)="AbrirParaEditar(row)">
+          <button mat-raised-button (click)="cambiarPassword(row.rut)" class="btn btn-warning">Cambiar
+            contraseña</button>
+        </td>
+      </ng-container>
+      <!-- eliminar Column -->
       <ng-container matColumnDef="eliminar">
         <th mat-header-cell *matHeaderCellDef mat-sort-header> </th>
         <td mat-cell *matCellDef="let row" (click)="AbrirParaEditar(row)">
-          <button mat-raised-button (click)="Eliminar(selectedCliente.id)" class="btn btn-danger">Eliminar</button>
+          <button mat-raised-button (click)="Eliminar(row.id)" class="btn btn-danger">Eliminar</button>
         </td>
       </ng-container>
-      <!-- Eliminar Column -->
+      <!-- Modificar Column -->
       <ng-container matColumnDef="editar">
         <th mat-header-cell *matHeaderCellDef mat-sort-header> </th>
         <td mat-cell *matCellDef="let row" (click)="AbrirParaEditar(row)">
@@ -63,7 +72,7 @@
   </div>
 
   <div class="agregar ">
-    <button mat-raised-button [routerLink]="['/cadmin/edit',selectedCliente.id]" class="btnAgregar">Agregar</button>
+    <button mat-raised-button [routerLink]="['/cadmin/edit',0]" class="btnAgregar">Agregar</button>
 
   </div>
 </body>

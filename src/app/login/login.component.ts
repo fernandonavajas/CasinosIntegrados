@@ -3,14 +3,18 @@ import { Router } from '@angular/router';
 import { User } from '../modelo/user'
 import { NavbarService } from '../navbar/navbar.service';
 import { LoginService } from './login.service';
+import { Tokens } from '../modelo/userTokens';
 
 const rutUsuario = '';
-const restUser: User = 
+var restUser: User = 
   {
     rut: '1-8',
     nombre: 'CCU',
-    role: 'cliente',
-    empleados: 22,
+    tokens:{
+      rol:'cliente',
+      api_key:''
+    }
+
   };
 
 @Component({
@@ -37,39 +41,51 @@ export class LoginComponent implements OnInit {
 
   logIn(rut: string, password: string, event: Event) {
 
-    console.log(rut);
-    console.log(password);
+    //console.log(rut);
+    //console.log(password);
     this.loginService.loggin(rut,password)
     .subscribe(
       res =>{
-        console.log(res);
+        if(res!=null){
+          //console.log(res);
+          //console.log(res.nombre);
+          if (res.tokens[0].rol=='admin') {
+            //console.log("es admin");
+            localStorage.setItem('currentUser', JSON.stringify(res));//ingresar como admin
+            this.navBarService.updateNavAfterAuth('admin');
+            this.navBarService.updateLoginStatus(true);
+            this.role = 'admin';
+          }
+          else {
+            //console.log("es cliente");
+            localStorage.setItem('currentUser', JSON.stringify(res));// ingresar como cliente
+            this.navBarService.updateNavAfterAuth('cliente');
+            this.navBarService.updateLoginStatus(true);
+            this.role = 'cliente';
+          }
+          this.navigate();
+        }
+        else{
+          alert("Fallo de autentificacion.");
+        }
+
+        
+    
+        
       },
       err =>{
         console.log(err);
       }
     );
 
-    if (restUser.role=='admin') {
-      localStorage.setItem('currentUser', JSON.stringify(restUser));//ingresar como admin
-      this.navBarService.updateNavAfterAuth('admin');
-      this.navBarService.updateLoginStatus(true);
-      this.role = 'admin';
-    }
-    else {
-      localStorage.setItem('currentUser', JSON.stringify(restUser));// ingresar como cliente
-      this.navBarService.updateNavAfterAuth('cliente');
-      this.navBarService.updateLoginStatus(true);
-      this.role = 'cliente';
-    }
-
-    this.navigate();
+    
 
   }
 
 
   navigate() {
     var user = JSON.parse(localStorage.getItem('currentUser'));
-    if (user.role == 'admin') {
+    if (user.tokens[0].rol == 'admin') {
       this._router.navigate(['hadmin']);
     }
     else {

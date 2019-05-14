@@ -11,9 +11,9 @@ input{
   
 }
 table {
-    width:95%;
-    margin-left: 2.5%;
-    margin-right: 2.5%;
+    width:98%;
+    margin-left: 1%;
+    margin-right: 1%;
 
   }
   
@@ -27,16 +27,16 @@ table {
     text-align: left;
   }
   th {
-    font-size: 14px;
+    font-size: 14.5px;
     font-family: sans-serif;
   }
   td {
-    font-size: 12px;
+    font-size: 12.5px;
     font-family: sans-serif;
   }
   
   .mat-header-cell, .mat-cell {
-    padding: 0 10px; 
+    padding: 0 5px; 
   }
   
   .header-group-row {
@@ -53,7 +53,7 @@ table {
   width: 1%;
 }
 .espacioMediano{
-  width: 15%;
+  width: 7%;
 }
 .cantidad{
   width: 50px;

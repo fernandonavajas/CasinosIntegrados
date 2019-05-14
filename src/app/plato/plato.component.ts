@@ -25,8 +25,7 @@ export class PlatoComponent implements OnInit {
     }
     else {
       var user = JSON.parse(localStorage.getItem('currentUser'));
-      if (user.role == 'admin') {
-        console.log(user.role);
+      if (user.tokens[0].rol == 'admin') {
       }
       else {
         this._router.navigate(['']);
@@ -45,7 +44,7 @@ export class PlatoComponent implements OnInit {
 
   applyFilter(filterValue: string) {
     this.dataSource.filter = filterValue.trim().toLowerCase();
-    console.log(this.dataSource.filteredData);
+    //console.log(this.dataSource.filteredData);
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage();
     }
@@ -55,11 +54,11 @@ export class PlatoComponent implements OnInit {
 
   public AbrirParaEditar(plato: Platos) {
     this.selectedPlato = plato;
-    console.log(this.selectedPlato);
+    //console.log(this.selectedPlato);
 
   }
   Eliminar(id: number){
-    console.log(this.selectedPlato.id);
+    //console.log(this.selectedPlato.id);
     this.platoService.EliminarPlato(id)
     .subscribe(
       res => {
@@ -74,7 +73,7 @@ export class PlatoComponent implements OnInit {
     this.platoService.listarPlatos()
       .subscribe(
         res => {
-          console.log(res)
+          //console.log(res)
           this.dataSource = new MatTableDataSource(res);
         },
         err => console.log(err)

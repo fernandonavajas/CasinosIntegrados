@@ -47,7 +47,7 @@ export class HomeAdminComponent implements OnInit {
     }
     else {
       var user = JSON.parse(localStorage.getItem('currentUser'));
-      if (user.role == 'admin') {
+      if (user.tokens[0].rol == 'admin') {
         this.gethistorialAdmin();
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;
@@ -77,7 +77,7 @@ export class HomeAdminComponent implements OnInit {
     this.homeAdminService.listarHistorialAdmin()
       .subscribe(
         res => {
-          console.log(res);
+          //console.log(res);
           res.forEach(element => {// recorre cada elemento de la respuesta del servidor....c/u es una empresa distinta
             //console.log(res.length)
             var fecha: any[] = []; // guarda todas las fechas distintas para cada empresa
@@ -121,15 +121,15 @@ export class HomeAdminComponent implements OnInit {
                       traspaso[j].cantVegetariano = element[i].cantidad;
                     }
                     if (element[i].carta.tipomenu.id == 6) {
-                      console.log(element[i].carta.tipomenu.id)
-                      console.log(element[i].carta.plato.nombre)
-                      console.log(element[i].cantidad)
+                      //console.log(element[i].carta.tipomenu.id)
+                      //console.log(element[i].carta.plato.nombre)
+                      //console.log(element[i].cantidad)
                       traspaso[j].regimen = element[i].carta.plato.nombre;
                       traspaso[j].cantRegimen = element[i].cantidad;
                     }
                 }
               }
-              console.log(traspaso);
+              //console.log(traspaso);
             }
           });
           this.dataSource = new MatTableDataSource(traspaso);
