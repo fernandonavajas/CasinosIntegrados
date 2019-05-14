@@ -1,11 +1,17 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatSort, MatTableDataSource } from '@angular/material';
 import { Router } from '@angular/router';
-import { DataSource } from '@angular/cdk/table';
+import { DataSource, FooterRowOutlet } from '@angular/cdk/table';
 import { RegistroService } from './registro.service';
 
 export class Menu2 {
   fecha: any;
+  idDeLaCasa: number;
+  idHipocalorico: number;
+  idIndustrial: number;
+  idOficina: number;
+  idVegetariano: number;
+  idRegimen: number;
   deLaCasa: string;
   hipocalorico: string;
   industrial: string;
@@ -30,7 +36,8 @@ var restMenu2: Menu2[] = [
   {
     fecha: "", deLaCasa: "a343434", hipocalorico: "s43434", industrial: "3434d", oficina: "f3434", regimen: "g343434", vegetariano: "3434h",
     cantDeLaCasa: 0, cantHipocalorico: 0, cantIndustrial: 0, cantOficina: 0, cantRegimen: 0, cantVegetariano: 0,
-    fotoDeLaCasa: "", fotoHipocalorico: "", fotoIndustrial: "", fotoOficina: "", fotoRegimen: "", fotoVegetariano: ""
+    fotoDeLaCasa: "", fotoHipocalorico: "", fotoIndustrial: "", fotoOficina: "", fotoRegimen: "", fotoVegetariano: "",
+    idDeLaCasa: 0, idHipocalorico: 0, idIndustrial: 0, idOficina: 0, idRegimen: 0, idVegetariano: 0
   }
 ];
 
@@ -124,17 +131,79 @@ export class RegistrosComponent implements OnInit {
     //console.log(user.rut);
     //console.log(user.id);
     var resultado = {
-      identifiers: [{id: 0}],
-      generatedMaps: [{id: 0,fecha: "0"}],
-      raw: [{id: 0,"fecha": "0"}]
+      identifiers: [{ id: 0 }],
+      generatedMaps: [{ id: 0, fecha: "0" }],
+      raw: [{ id: 0, "fecha": "0" }]
     }
     console.log(menu2.data);//data con cantidades solicitadas
     this.registroService.submitPedido(user.rut, user.id)
       .subscribe(
         res => {
           resultado = res;
+          console.log(resultado)
           //console.log(resultado.identifiers[0].id); // el id del pedido, bajo este mismo id se hara el detalle del pedido
-          
+          menu2.data.forEach(pedido => {//cada pedido
+
+            for (var i = 1; i < 7; i++) {//cada cantidad ingresada, falta saber cual es el id carta
+              if (i == 1) {// de la casa
+                console.log(pedido.cantDeLaCasa, pedido.idDeLaCasa, resultado.identifiers[0].id, "de la casa");
+                this.registroService.submitDetalle(pedido.cantDeLaCasa, pedido.idDeLaCasa, resultado.identifiers[0].id)
+                  .subscribe(
+                    r => {
+                      console.log("lo logro 1");
+                    }
+                  )
+              }
+              if (i == 2) {// oficina
+                console.log(pedido.cantOficina, pedido.idOficina, resultado.identifiers[0].id, "oficina");
+                this.registroService.submitDetalle(pedido.cantOficina, pedido.idOficina, resultado.identifiers[0].id)
+                  .subscribe(
+                    r => {
+                      console.log("lo logro 2");
+                    }
+                  )
+              }
+              if (i == 3) {// industrial
+                console.log(pedido.cantIndustrial, pedido.idIndustrial, resultado.identifiers[0].id, "industrial");
+                this.registroService.submitDetalle(pedido.cantIndustrial, pedido.idIndustrial, resultado.identifiers[0].id)
+                  .subscribe(
+                    r => {
+                      console.log("lo logro 3");
+                    }
+                  )
+              }
+              if (i == 4) {// hipocalorico
+                console.log(pedido.cantHipocalorico, pedido.idHipocalorico, resultado.identifiers[0].id, "hipo");
+                this.registroService.submitDetalle(pedido.cantHipocalorico, pedido.idHipocalorico, resultado.identifiers[0].id)
+                  .subscribe(
+                    r => {
+                      console.log("lo logro 4");
+                    }
+                  )
+              }
+              if (i == 5) {// vegetariano
+                console.log(pedido.cantVegetariano, pedido.idVegetariano, resultado.identifiers[0].id, "vegetariano");
+                this.registroService.submitDetalle(pedido.cantVegetariano, pedido.idVegetariano, resultado.identifiers[0].id)
+                  .subscribe(
+                    r => {
+                      console.log("lo logro 5");
+                    }
+                  )
+              }
+              if (i == 6) {// regimen
+                console.log(pedido.cantRegimen, pedido.idRegimen, resultado.identifiers[0].id, "regimen");
+                this.registroService.submitDetalle(pedido.cantRegimen, pedido.idRegimen, resultado.identifiers[0].id)
+                  .subscribe(
+                    r => {
+                      console.log("lo logro 6");
+                    }
+                  )
+
+              }
+
+            }
+          });
+
         },
         err => console.log(err)
       )
@@ -166,6 +235,7 @@ export class RegistrosComponent implements OnInit {
     this.registroService.listarCarta()
       .subscribe(
         resCarta => {
+          console.log(resCarta);
           var i: number = 0;
           var traspaso: Menu2[] = [];
           this.registroService.listarFechas()
@@ -183,28 +253,35 @@ export class RegistrosComponent implements OnInit {
                         traspaso[i] = {
                           fecha: "", deLaCasa: "", hipocalorico: "", industrial: "", oficina: "", regimen: "", vegetariano: "",
                           cantDeLaCasa: 0, cantHipocalorico: 0, cantIndustrial: 0, cantOficina: 0, cantRegimen: 0, cantVegetariano: 0,
-                          fotoDeLaCasa: "", fotoHipocalorico: "", fotoIndustrial: "", fotoOficina: "", fotoRegimen: "", fotoVegetariano: ""
+                          fotoDeLaCasa: "", fotoHipocalorico: "", fotoIndustrial: "", fotoOficina: "", fotoRegimen: "", fotoVegetariano: "",
+                          idDeLaCasa: 0, idHipocalorico: 0, idIndustrial: 0, idOficina: 0, idRegimen: 0, idVegetariano: 0
                         };
                       }
 
                       traspaso[i].fecha = element.fecha;
                       if (element.tipomenu.id == 1) {//de la casa
                         traspaso[i].deLaCasa = element.plato.nombre;
+                        traspaso[i].idDeLaCasa = element.id;
                       }
                       if (element.tipomenu.id == 2) {//oficina
                         traspaso[i].oficina = element.plato.nombre;
+                        traspaso[i].idOficina = element.id;
                       }
                       if (element.tipomenu.id == 3) {//industrial
                         traspaso[i].industrial = element.plato.nombre;
+                        traspaso[i].idIndustrial = element.id;
                       }
                       if (element.tipomenu.id == 4) {//hipocalorico
                         traspaso[i].hipocalorico = element.plato.nombre;
+                        traspaso[i].idHipocalorico = element.id;
                       }
                       if (element.tipomenu.id == 5) {//vegetariano
                         traspaso[i].vegetariano = element.plato.nombre;
+                        traspaso[i].idVegetariano = element.id;
                       }
                       if (element.tipomenu.id == 6) {//regimen
                         traspaso[i].regimen = element.plato.nombre;
+                        traspaso[i].idRegimen = element.id;
                       }
 
                     }

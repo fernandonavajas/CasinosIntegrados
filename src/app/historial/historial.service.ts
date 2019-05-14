@@ -14,10 +14,10 @@ export class HistorialService {
   BASE_URL: string = 'http://localhost:3000';
   constructor(private http: HttpClient) { }
 
-  listarHistorial(rut:string): Observable<any[]> {
+  listarHistorial(rut:number): Observable<any[]> {
     const headers = new HttpHeaders({
       "Content-Type": "*/*",
-      "rut": rut
+      "rut": rut.toString()
     })
     return this.http.get<any[]>(`${this.BASE_URL}/pedidos`, { headers });
   }

@@ -42,14 +42,32 @@ td, th {
 }
 .container {
   display: flex; /* or inline-flex */
-  width: 100%;
-  justify-content: center;
+    width: 1;
+    justify-content: center;
+  
+}
+
+mat-form-field{
+    margin-left: 25px;
+    display: block;
+    color: aliceblue;
+}
+select{
+  margin: 15px;
+  width: 150px;
+}
+.inputNormal{
+  margin: 15px;
+  width: 150px;
+  height: 30px;
+}
+.pullRight{
   
 }
 .agregar{
-width: 60%;
-margin-left: 20%;
-margin-right: 20%;
+  background: rgb(0,93,169);
+background: linear-gradient(174deg, rgba(0,93,169,1) 0%, rgba(0,169,161,0.938813025210084) 84%);
+margin: 5%;
 margin-top: 50px;
 border-radius: 10px;
 padding: 5px;

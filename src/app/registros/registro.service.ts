@@ -45,5 +45,18 @@ export class RegistroService {
     })
     return this.http.post<any>(`${this.BASE_URL}/pedidos`, pedido);
   }
+  submitDetalle(cantidad: number, cartaId: number, pedidoId: number): Observable<any> {
+    var detalle = {
+      cantidad: cantidad,
+      cartaId: cartaId,
+      pedidoId: pedidoId
+    }
+    //console.log(detalle);
+    const headers = new HttpHeaders({
+      "Content-Type": "*/*"
+    })
+    return this.http.post<any>(`${this.BASE_URL}/detalle`, detalle);
+  }
+
 
 }

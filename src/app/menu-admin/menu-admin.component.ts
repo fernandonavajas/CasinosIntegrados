@@ -3,6 +3,8 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
 import { MenuAdminService } from './menu-admin.service';
 import { Menus } from '../modelo/menus';
+import { Plato } from '../modelo/plato';
+import { Carta } from '../modelo/carta';
 var restCarta: Menus[];
 
 @Component({
@@ -13,6 +15,19 @@ var restCarta: Menus[];
 export class MenuAdminComponent implements OnInit {
   displayedColumns: string[] = ['fecha', 'industrial', 'deLaCasa', 'oficina', 'hipocalorico', 'vegetariano', 'regimen'];
   dataSource: MatTableDataSource<Menus>;
+
+  platos = [];
+  data = {
+    industrial: 0,
+    deLaCasa: 0,
+    oficina: 0,
+    hipocalorico: 0,
+    vegetariano: 0,
+    regimen: 0,
+
+  };
+  fecha: Date;
+
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
@@ -53,8 +68,63 @@ export class MenuAdminComponent implements OnInit {
 
   }
 
-  AgregarEditar() {
+  Agregar() {
+    if (this.data) {
+      
+      var carta = {
+        fecha: this.convertirFecha(this.fecha),
+        tipoMenuId: 0,
+        platoId: 0
+      }
+      console.log(carta.fecha);
+      if (this.data.deLaCasa) {
+        carta.tipoMenuId=1;
+        carta.platoId=this.data.deLaCasa;
+        this.menuAdminService.crearCarta(carta).subscribe(
+          r=>{this.getCarta();}
+        )
 
+      }
+      if(this.data.oficina){
+        carta.tipoMenuId=2;
+        carta.platoId=this.data.oficina;
+        this.menuAdminService.crearCarta(carta).subscribe(
+          r=>{this.getCarta();}
+        )
+
+      }
+      if(this.data.industrial){
+        carta.tipoMenuId=3;
+        carta.platoId=this.data.industrial;
+        this.menuAdminService.crearCarta(carta).subscribe(
+          r=>{this.getCarta();}
+        )
+
+      }
+      if(this.data.hipocalorico){
+        carta.tipoMenuId=4;
+        carta.platoId=this.data.hipocalorico;
+        this.menuAdminService.crearCarta(carta).subscribe(
+          r=>{this.getCarta();}
+        )
+
+      }
+      if(this.data.vegetariano){
+        carta.tipoMenuId=5;
+        carta.platoId=this.data.vegetariano;
+        this.menuAdminService.crearCarta(carta).subscribe(
+          r=>{this.getCarta();}
+        )
+      }
+      if(this.data.regimen){
+        carta.tipoMenuId=6;
+        carta.platoId=this.data.regimen;
+        this.menuAdminService.crearCarta(carta).subscribe(
+          r=>{this.getCarta();}
+        )
+      }
+      
+    }
   }
   Eliminar() {
     if (confirm('¿Estas seguro de eliminar a este usuario?')) {
@@ -67,7 +137,7 @@ export class MenuAdminComponent implements OnInit {
     this.menuAdminService.listarPlatos()
       .subscribe(
         res => {
-          //console.log(res)
+          this.platos = res;
         },
         err => console.log(err)
       )
@@ -75,12 +145,14 @@ export class MenuAdminComponent implements OnInit {
 
 
   convertirFecha(fecha: any): Date {
+    //console.log(fecha,"para cambiar");
     var date_input = new Date(fecha);
-    var day = date_input.getDate();
+    var day = date_input.getDate()+1;
     var month = date_input.getMonth() + 1;
     var year = date_input.getFullYear();
     var yyyy_MM_dd = year + "-" + month + "-" + day;
     var f = new Date(yyyy_MM_dd);
+    //console.log(f,"fecha cambiada");
     return f;
   }
 

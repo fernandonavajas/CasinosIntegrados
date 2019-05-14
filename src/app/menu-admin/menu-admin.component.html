@@ -14,40 +14,40 @@
 
       <!-- menu 1 Column -->
       <ng-container matColumnDef="industrial">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> Industrial</th>
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Menú Industrial</th>
         <td mat-cell *matCellDef="let row" (click)="AbrirParaEditar(row)"> {{row.industrial}} </td>
       </ng-container>
 
       <!-- menu 2 Column -->
       <ng-container matColumnDef="deLaCasa">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> De la casa </th>
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Menú de la casa </th>
         <td mat-cell *matCellDef="let row" (click)="AbrirParaEditar(row)"> {{row.deLaCasa}} </td>
       </ng-container>
 
       <!-- menu 3 Column -->
       <ng-container matColumnDef="oficina">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> Oficina </th>
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Menú Oficina </th>
         <td mat-cell *matCellDef="let row" (click)="AbrirParaEditar(row)"> {{row.oficina}} </td>
       </ng-container>
 
       <!-- menu 4 Column -->
       <ng-container matColumnDef="hipocalorico">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> Hipocalorico </th>
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Menú Hipocalorico </th>
         <td mat-cell *matCellDef="let row" (click)="AbrirParaEditar(row)"> {{row.hipocalorico}} </td>
       </ng-container>
 
       <!-- menu 4 Column -->
       <ng-container matColumnDef="vegetariano">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header> Vegetariano </th>
-          <td mat-cell *matCellDef="let row" (click)="AbrirParaEditar(row)"> {{row.vegetariano}} </td>
-        </ng-container>
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Menú Vegetariano </th>
+        <td mat-cell *matCellDef="let row" (click)="AbrirParaEditar(row)"> {{row.vegetariano}} </td>
+      </ng-container>
 
-        <!-- menu 4 Column -->
+      <!-- menu 4 Column -->
       <ng-container matColumnDef="regimen">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header> Regimen </th>
-          <td mat-cell *matCellDef="let row" (click)="AbrirParaEditar(row)"> {{row.regimen}} </td>
-        </ng-container>
-  
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Menú Regimen </th>
+        <td mat-cell *matCellDef="let row" (click)="AbrirParaEditar(row)"> {{row.regimen}} </td>
+      </ng-container>
+
 
 
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
@@ -55,32 +55,55 @@
       </tr>
     </table>
 
-    <mat-paginator [pageSizeOptions]="[10, 25, 50, 100]"></mat-paginator>
+    <!--<mat-paginator [pageSizeOptions]="[10, 25, 50, 100]"></mat-paginator>-->
   </div>
-
+  <!--
+  <table>
+<tr *ngFor="let item of lista">
+<td>{{item}}</td>
+</tr>
+</table>
+-->
   <div class="agregar ">
     <div class="container ">
+      <input class="inputNormal" type="text"  #f [(ngModel)]="fecha" placeholder='Agregar Fecha'>
 
-      <mat-form-field>
-        <input type="string" matInput [(ngModel)]="selectedMenu.fecha" placeholder=''>
-      </mat-form-field>
-      <mat-form-field>
-        <input type="string" matInput [(ngModel)]="selectedMenu.menu1" placeholder=''>
-      </mat-form-field>
-      <mat-form-field>
-        <input type="string" matInput [(ngModel)]="selectedMenu.menu2" placeholder=''>
-      </mat-form-field>
-      <mat-form-field>
-        <input type="string" matInput [(ngModel)]="selectedMenu.menu3" placeholder=''>
-      </mat-form-field>
-      <mat-form-field>
-        <input type="string" matInput [(ngModel)]="selectedMenu.menu4" placeholder=''>
-      </mat-form-field>
-      <button mat-raised-button (click)="AgregarEditar()" class="btnAgregar">Agregar</button>
-      <button mat-raised-button *ngIf="selectedMenu.fecha !== 0" (click)="Eliminar()"
-        class="btnEliminar">Eliminar</button>
+      <select class="form-control form-control-lg" #mIndustrial [(ngModel)]="data.industrial">
+        <option style="background:crimson ; color: aliceblue">Industrial</option>
+        <option>--------</option>
+        <option *ngFor='let plato of platos'> {{plato.id}}</option>
+      </select>
+      <select class="form-control form-control-lg" #mDeLaCasa [(ngModel)]="data.deLaCasa">
+        <option style="background:crimson ; color: aliceblue">De la casa</option>
+        <option>--------</option>
+        <option *ngFor='let plato of platos'>{{plato.id}}</option>
+      </select>
+      <select class="form-control form-control-lg" #mOficina [(ngModel)]="data.oficina">
+        <option style="background:crimson ; color: aliceblue">Oficina</option>
+        <option>--------</option>
+        <option *ngFor='let plato of platos'>{{plato.id}}</option>
+      </select>
+      <select class="form-control form-control-lg" #mHipocalorico [(ngModel)]="data.hipocalorico">
+        <option style="background:crimson ; color: aliceblue">Hipocalorico</option>
+        <option>--------</option>
+        <option *ngFor='let plato of platos'>{{plato.id}}</option>
+      </select>
+      <select class="form-control form-control-lg" #mVegetariano [(ngModel)]="data.vegetariano">
+        <option style="background:crimson ; color: aliceblue">Vegetariano</option>
+        <option>--------</option>
+        <option *ngFor='let plato of platos'>{{plato.id}}</option>
+      </select>
+      <select class="form-control form-control-lg" #mRegimen [(ngModel)]="data.regimen">
+        <option style="background:crimson ; color: aliceblue">Regimen</option>
+        <option>--------</option>
+        <option *ngFor='let plato of platos'>{{plato.id}}</option>
+      </select>
+
+      <button class="pullRight" mat-raised-button (click)="Agregar()" class="btnAgregar">Agregar</button>
     </div>
 
+    <!--<button mat-raised-button *ngIf="selectedMenu.fecha !== 0" (click)="Eliminar()"
+      class="btnEliminar">Eliminar</button>-->
   </div>
 
 </body>

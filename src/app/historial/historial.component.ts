@@ -48,7 +48,8 @@ export class HistorialComponent implements OnInit {
     }
     else {
       var user = JSON.parse(localStorage.getItem('currentUser'));
-      this.gethistorial('18990554');
+      console.log(user.rut,typeof(user.rut));
+      this.gethistorial(user.rut);
 
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
@@ -68,7 +69,7 @@ export class HistorialComponent implements OnInit {
       this.dataSource.paginator.firstPage();
     }
   }
-  gethistorial(rut) {
+  gethistorial(rut:number) {
     var fecha: any[] = [];
     var traspaso: Hclient[] = [];
     this.historailService.listarHistorial(rut)
