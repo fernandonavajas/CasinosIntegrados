@@ -3,8 +3,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
 import { MenuAdminService } from './menu-admin.service';
 import { Menus } from '../modelo/menus';
-import { Plato } from '../modelo/plato';
-import { Carta } from '../modelo/carta';
+
 var restCarta: Menus[];
 
 @Component({
@@ -70,7 +69,7 @@ export class MenuAdminComponent implements OnInit {
 
   Agregar() {
     if (this.data) {
-      
+
       var carta = {
         fecha: this.convertirFecha(this.fecha),
         tipoMenuId: 0,
@@ -78,52 +77,52 @@ export class MenuAdminComponent implements OnInit {
       }
       console.log(carta.fecha);
       if (this.data.deLaCasa) {
-        carta.tipoMenuId=1;
-        carta.platoId=this.data.deLaCasa;
+        carta.tipoMenuId = 1;
+        carta.platoId = this.data.deLaCasa;
         this.menuAdminService.crearCarta(carta).subscribe(
-          r=>{this.getCarta();}
+          r => { this.getCarta(); }
         )
 
       }
-      if(this.data.oficina){
-        carta.tipoMenuId=2;
-        carta.platoId=this.data.oficina;
+      if (this.data.oficina) {
+        carta.tipoMenuId = 2;
+        carta.platoId = this.data.oficina;
         this.menuAdminService.crearCarta(carta).subscribe(
-          r=>{this.getCarta();}
+          r => { this.getCarta(); }
         )
 
       }
-      if(this.data.industrial){
-        carta.tipoMenuId=3;
-        carta.platoId=this.data.industrial;
+      if (this.data.industrial) {
+        carta.tipoMenuId = 3;
+        carta.platoId = this.data.industrial;
         this.menuAdminService.crearCarta(carta).subscribe(
-          r=>{this.getCarta();}
+          r => { this.getCarta(); }
         )
 
       }
-      if(this.data.hipocalorico){
-        carta.tipoMenuId=4;
-        carta.platoId=this.data.hipocalorico;
+      if (this.data.hipocalorico) {
+        carta.tipoMenuId = 4;
+        carta.platoId = this.data.hipocalorico;
         this.menuAdminService.crearCarta(carta).subscribe(
-          r=>{this.getCarta();}
+          r => { this.getCarta(); }
         )
 
       }
-      if(this.data.vegetariano){
-        carta.tipoMenuId=5;
-        carta.platoId=this.data.vegetariano;
+      if (this.data.vegetariano) {
+        carta.tipoMenuId = 5;
+        carta.platoId = this.data.vegetariano;
         this.menuAdminService.crearCarta(carta).subscribe(
-          r=>{this.getCarta();}
+          r => { this.getCarta(); }
         )
       }
-      if(this.data.regimen){
-        carta.tipoMenuId=6;
-        carta.platoId=this.data.regimen;
+      if (this.data.regimen) {
+        carta.tipoMenuId = 6;
+        carta.platoId = this.data.regimen;
         this.menuAdminService.crearCarta(carta).subscribe(
-          r=>{this.getCarta();}
+          r => { this.getCarta(); }
         )
       }
-      
+
     }
   }
   Eliminar() {
@@ -136,18 +135,17 @@ export class MenuAdminComponent implements OnInit {
   getPlatos() {
     this.menuAdminService.listarPlatos()
       .subscribe(
-        res => {
-          this.platos = res;
+        resPlatos => {
+          this.platos = resPlatos;
         },
         err => console.log(err)
       )
   }
 
-
   convertirFecha(fecha: any): Date {
     //console.log(fecha,"para cambiar");
     var date_input = new Date(fecha);
-    var day = date_input.getDate()+1;
+    var day = date_input.getDate() + 1;
     var month = date_input.getMonth() + 1;
     var year = date_input.getFullYear();
     var yyyy_MM_dd = year + "-" + month + "-" + day;
@@ -156,59 +154,14 @@ export class MenuAdminComponent implements OnInit {
     return f;
   }
 
-
-
   getCarta() {
     this.menuAdminService.listarCarta()
       .subscribe(
         resCarta => {
-          var i: number = 0;
-          var traspaso: Menus[] = [];
-          this.menuAdminService.listarFechas()
-            .subscribe(
-              resFechas => {
-                resCarta.forEach(element => {
-
-                  for (i = 0; i < resFechas.length; i++) {
-                    var a = this.convertirFecha(element.fecha);
-                    var b = this.convertirFecha(resFechas[i].fecha);
-                    //console.log(a.toDateString());
-                    //console.log(b.toDateString());
-                    if (a.toDateString() == b.toDateString()) {
-                      if (traspaso[i] == null) {
-                        traspaso[i] = { fecha: "", deLaCasa: "", hipocalorico: "", industrial: "", oficina: "", regimen: "", vegetariano: "" };
-                      }
-
-                      traspaso[i].fecha = element.fecha;
-                      if (element.tipomenu.id == 1) {
-                        traspaso[i].deLaCasa = element.plato.nombre;
-                      }
-                      if (element.tipomenu.id == 2) {
-                        traspaso[i].oficina = element.plato.nombre;
-                      }
-                      if (element.tipomenu.id == 3) {
-                        traspaso[i].industrial = element.plato.nombre;
-                      }
-                      if (element.tipomenu.id == 4) {
-                        traspaso[i].hipocalorico = element.plato.nombre;
-                      }
-                      if (element.tipomenu.id == 5) {
-                        traspaso[i].vegetariano = element.plato.nombre;
-                      }
-                      if (element.tipomenu.id == 6) {
-                        traspaso[i].regimen = element.plato.nombre;
-                      }
-
-                    }
-                  }
-                });
-                //console.log(traspaso);
-                this.dataSource = new MatTableDataSource(traspaso);
-
-              },
-              err => console.log(err)
-            );
-
+          console.log(resCarta);
+          this.dataSource.data=resCarta;
+          this.dataSource.paginator = this.paginator;
+          this.dataSource.sort = this.sort;
         },
         err => console.log(err)
       );
