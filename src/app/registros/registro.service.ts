@@ -3,6 +3,7 @@ import { HttpHeaders, HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Pedido } from '../modelo/pedido';
 import { Carta } from '../modelo/carta';
+import { resultadopedido } from './registros.component';
 
 
 @Injectable({
@@ -20,11 +21,12 @@ export class RegistroService {
     })
     return this.http.get<any[]>(`${this.BASE_URL}/pedidos`, { headers });
   }
-  listarCarta(): Observable<Carta[]> {
+  listarCarta(rut: string): Observable<any[]> {
     const headers = new HttpHeaders({
       "Content-Type": "*/*",
+      "rut": rut
     })
-    return this.http.get<Carta[]>(`${this.BASE_URL}/carta`, { headers });
+    return this.http.get<Carta[]>(`${this.BASE_URL}/carta/usuario`, { headers });
   }
   listarFechas(): Observable<any[]> {
     const headers = new HttpHeaders({
@@ -33,7 +35,7 @@ export class RegistroService {
     return this.http.get<any[]>(`${this.BASE_URL}/carta/fechas`, { headers });
   }
 
-  submitPedido(rut: number, idUsuario: number): Observable<any> {
+  submitPedido(rut: number, idUsuario: number): Observable<resultadopedido> {
     var pedido = {
       rut: rut,
       fecha: new Date(),
@@ -43,15 +45,15 @@ export class RegistroService {
     const headers = new HttpHeaders({
       "Content-Type": "*/*"
     })
-    return this.http.post<any>(`${this.BASE_URL}/pedidos`, pedido);
+    return this.http.post<resultadopedido>(`${this.BASE_URL}/pedidos`, pedido);
   }
   submitDetalle(cantidad: number, cartaId: number, pedidoId: number): Observable<any> {
     var detalle = {
       cantidad: cantidad,
-      cartaId: cartaId,
-      pedidoId: pedidoId
+      idCarta: cartaId,
+      idPedido: pedidoId
     }
-    //console.log(detalle);
+    console.log("Esto esta en la funcion submit detalle ",detalle);
     const headers = new HttpHeaders({
       "Content-Type": "*/*"
     })

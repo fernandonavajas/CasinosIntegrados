@@ -5,41 +5,34 @@ import { DataSource, FooterRowOutlet } from '@angular/cdk/table';
 import { RegistroService } from './registro.service';
 
 export class Menu2 {
-  fecha: any;
-  idDeLaCasa: number;
-  idHipocalorico: number;
-  idIndustrial: number;
-  idOficina: number;
-  idVegetariano: number;
-  idRegimen: number;
-  deLaCasa: string;
+  fechacarta: Date;
+  iddelacasa: number;
+  idhipocalorico: number;
+  idindustrial: number;
+  idoficina: number;
+  idvegetariano: number;
+  idregimen: number;
+  delacasa: string;
   hipocalorico: string;
   industrial: string;
   oficina: string;
   regimen: string;
   vegetariano: string;
-  cantDeLaCasa: number;
-  cantHipocalorico: number;
-  cantIndustrial: number;
-  cantOficina: number;
-  cantRegimen: number;
-  cantVegetariano: number;
-  fotoDeLaCasa: string;
-  fotoHipocalorico: string;
-  fotoIndustrial: string;
-  fotoOficina: string;
-  fotoRegimen: string;
-  fotoVegetariano: string;
+  cantdelacasa: number ;
+  canthipocalorico: number;
+  cantindustrial: number;
+  cantoficina: number;
+  cantregimen: number;
+  cantvegetariano: number;
 
 }
-var restMenu2: Menu2[] = [
-  {
-    fecha: "", deLaCasa: "a343434", hipocalorico: "s43434", industrial: "3434d", oficina: "f3434", regimen: "g343434", vegetariano: "3434h",
-    cantDeLaCasa: 0, cantHipocalorico: 0, cantIndustrial: 0, cantOficina: 0, cantRegimen: 0, cantVegetariano: 0,
-    fotoDeLaCasa: "", fotoHipocalorico: "", fotoIndustrial: "", fotoOficina: "", fotoRegimen: "", fotoVegetariano: "",
-    idDeLaCasa: 0, idHipocalorico: 0, idIndustrial: 0, idOficina: 0, idRegimen: 0, idVegetariano: 0
-  }
-];
+export class resultadopedido {
+  identifiers: [{ id: 0 }];
+  generatedMaps: [{ id: 0, fecha: "0" }];
+  raw: [{ id: 0, "fecha": "0" }]
+}
+
+var restMenu2: Menu2[] = [];
 
 @Component({
   selector: 'app-registros',
@@ -70,8 +63,8 @@ export class RegistrosComponent implements OnInit {
       else {
         if (user.tokens[0].rol == 'cliente') {
           //this.getRegistro('18990554');//Esto me entrega el historial
-          //console.log(user);
-          this.getCarta();
+          console.log(user);
+          this.getCarta(user.rut);
         }
         else {
           this._router.navigate(['']);
@@ -95,29 +88,28 @@ export class RegistrosComponent implements OnInit {
 
   selectedMenu: Menu2[];
 
-  cambio(fecha: Date, cantidad: number, position: number) {
+  cambio(fecha: Date, cantidad: string, position: number) {
     this.selectedMenu = restMenu2;
-
-    var cant = +cantidad;
     this.selectedMenu.forEach(element => {
-      if (element.fecha == fecha.toString()) {
+      if (element.fechacarta == fecha) {
         if (position == 1) {//de la casa
-          element.cantDeLaCasa = cant;
+          element.cantdelacasa = parseInt(cantidad);
+
         }
         if (position == 2) {//oficina
-          element.cantOficina = cant;
+          element.cantoficina = parseInt(cantidad);
         }
         if (position == 3) {//industrial
-          element.cantIndustrial = cant;
+          element.cantindustrial = parseInt(cantidad);
         }
         if (position == 4) {//hipo
-          element.cantHipocalorico = cant;
+          element.canthipocalorico = parseInt(cantidad);
         }
         if (position == 5) {//vegetariano
-          element.cantVegetariano = cant;
+          element.cantvegetariano = parseInt(cantidad);
         }
         if (position == 6) {//regimen
-          element.cantRegimen = cant;
+          element.cantregimen = parseInt(cantidad);
         }
 
       }
@@ -128,85 +120,62 @@ export class RegistrosComponent implements OnInit {
 
   Modificar(menu2: any) { //funcion para agregar los pedidos con su correspondiente detalle
     var user = JSON.parse(localStorage.getItem('currentUser'));
-    //console.log(user.rut);
-    //console.log(user.id);
-    var resultado = {
-      identifiers: [{ id: 0 }],
-      generatedMaps: [{ id: 0, fecha: "0" }],
-      raw: [{ id: 0, "fecha": "0" }]
-    }
-    console.log(menu2.data);//data con cantidades solicitadas
-    this.registroService.submitPedido(user.rut, user.id)
-      .subscribe(
-        res => {
-          resultado = res;
-          console.log(resultado)
-          //console.log(resultado.identifiers[0].id); // el id del pedido, bajo este mismo id se hara el detalle del pedido
-          menu2.data.forEach(pedido => {//cada pedido
-
-            for (var i = 1; i < 7; i++) {//cada cantidad ingresada, falta saber cual es el id carta
-              if (i == 1) {// de la casa
-                console.log(pedido.cantDeLaCasa, pedido.idDeLaCasa, resultado.identifiers[0].id, "de la casa");
-                this.registroService.submitDetalle(pedido.cantDeLaCasa, pedido.idDeLaCasa, resultado.identifiers[0].id)
-                  .subscribe(
-                    r => {
-                      console.log("lo logro 1");
-                    }
-                  )
+    
+    menu2.data.forEach(element => {//  guardar los que tengan algun numero mayor a 0
+      if (element.cantdelacasa > 0 || element.canthipocalorico > 0 ||
+        element.cantindustrial > 0 || element.cantvegetariano > 0 ||
+        element.cantoficina > 0 || element.cantregimen > 0) {
+        console.log(element);
+        this.registroService.submitPedido(user.rut, user.id) // generar un pedido con el rut del usuario
+          .subscribe(
+            res => {
+              console.log(res.identifiers[0].id);// este es el id del pedido generado
+              if(element.cantdelacasa>=0){
+                //console.log(element.cantdelacasa);// esta es la cantidad a guardar
+                //console.log(element.iddelacasa);// estes es el id de la carta
+                this.registroService.submitDetalle(element.cantdelacasa,element.iddelacasa,res.identifiers[0].id)
+                .subscribe(res =>{},err=>console.log('Error en el guardado del detalle',err))
               }
-              if (i == 2) {// oficina
-                console.log(pedido.cantOficina, pedido.idOficina, resultado.identifiers[0].id, "oficina");
-                this.registroService.submitDetalle(pedido.cantOficina, pedido.idOficina, resultado.identifiers[0].id)
-                  .subscribe(
-                    r => {
-                      console.log("lo logro 2");
-                    }
-                  )
-              }
-              if (i == 3) {// industrial
-                console.log(pedido.cantIndustrial, pedido.idIndustrial, resultado.identifiers[0].id, "industrial");
-                this.registroService.submitDetalle(pedido.cantIndustrial, pedido.idIndustrial, resultado.identifiers[0].id)
-                  .subscribe(
-                    r => {
-                      console.log("lo logro 3");
-                    }
-                  )
-              }
-              if (i == 4) {// hipocalorico
-                console.log(pedido.cantHipocalorico, pedido.idHipocalorico, resultado.identifiers[0].id, "hipo");
-                this.registroService.submitDetalle(pedido.cantHipocalorico, pedido.idHipocalorico, resultado.identifiers[0].id)
-                  .subscribe(
-                    r => {
-                      console.log("lo logro 4");
-                    }
-                  )
-              }
-              if (i == 5) {// vegetariano
-                console.log(pedido.cantVegetariano, pedido.idVegetariano, resultado.identifiers[0].id, "vegetariano");
-                this.registroService.submitDetalle(pedido.cantVegetariano, pedido.idVegetariano, resultado.identifiers[0].id)
-                  .subscribe(
-                    r => {
-                      console.log("lo logro 5");
-                    }
-                  )
-              }
-              if (i == 6) {// regimen
-                console.log(pedido.cantRegimen, pedido.idRegimen, resultado.identifiers[0].id, "regimen");
-                this.registroService.submitDetalle(pedido.cantRegimen, pedido.idRegimen, resultado.identifiers[0].id)
-                  .subscribe(
-                    r => {
-                      console.log("lo logro 6");
-                    }
-                  )
+              if(element.canthipocalorico>=0){
+                this.registroService.submitDetalle(element.canthipocalorico,element.idhipocalorico,res.identifiers[0].id)
+                .subscribe(res =>{},err=>console.log('Error en el guardado del detalle',err))
 
               }
+              if(element.cantindustrial>=0){
+                this.registroService.submitDetalle(element.cantindustrial,element.idindustrial,res.identifiers[0].id)
+                .subscribe(res =>{},err=>console.log('Error en el guardado del detalle',err))
+                
+              }
+              if(element.cantoficina>=0){
+                this.registroService.submitDetalle(element.cantoficina,element.idoficina,res.identifiers[0].id)
+                .subscribe(res =>{},err=>console.log('Error en el guardado del detalle',err))
+                
+              }
+              if(element.cantvegetariano>=0){
+                this.registroService.submitDetalle(element.cantvegetariano,element.idvegetariano,res.identifiers[0].id)
+                .subscribe(res =>{},err=>console.log('Error en el guardado del detalle',err))
+                
+              }
+              if(element.cantregimen>=0){
+                this.registroService.submitDetalle(element.cantregimen,element.idregimen,res.identifiers[0].id)
+                .subscribe(res =>{},err=>console.log('Error en el guardado del detalle',err))
+                
+              }
 
-            }
-          });
+              //.............hacer mas ifs
+              
 
-        },
-        err => console.log(err)
-      )
+              //obtener el numero de pedido creado y genera detalles por cada cantidad ingresada
+
+            },
+            err => console.log(err)
+          )
+      }
+    });
+    //console.log(menu2.data);//data con cantidades solicitadas
+
+
+
     //if (confirm('Datos guardados con exito')) {
     //}
   }
@@ -231,70 +200,15 @@ export class RegistrosComponent implements OnInit {
     return f;
   }
 
-  getCarta() {
-    this.registroService.listarCarta()
+  getCarta(rut: number) {
+    this.registroService.listarCarta(rut.toString())
       .subscribe(
         resCarta => {
+          resCarta.forEach(element => {
+          });
           console.log(resCarta);
-          var i: number = 0;
-          var traspaso: Menu2[] = [];
-          this.registroService.listarFechas()
-            .subscribe(
-              resFechas => {
-                resCarta.forEach(element => {
-
-                  for (i = 0; i < resFechas.length; i++) {
-                    var a = this.convertirFecha(element.fecha);
-                    var b = this.convertirFecha(resFechas[i].fecha);
-                    //console.log(a.toDateString());
-                    //console.log(b.toDateString());
-                    if (a.toDateString() == b.toDateString()) {
-                      if (traspaso[i] == null) {
-                        traspaso[i] = {
-                          fecha: "", deLaCasa: "", hipocalorico: "", industrial: "", oficina: "", regimen: "", vegetariano: "",
-                          cantDeLaCasa: 0, cantHipocalorico: 0, cantIndustrial: 0, cantOficina: 0, cantRegimen: 0, cantVegetariano: 0,
-                          fotoDeLaCasa: "", fotoHipocalorico: "", fotoIndustrial: "", fotoOficina: "", fotoRegimen: "", fotoVegetariano: "",
-                          idDeLaCasa: 0, idHipocalorico: 0, idIndustrial: 0, idOficina: 0, idRegimen: 0, idVegetariano: 0
-                        };
-                      }
-
-                      traspaso[i].fecha = element.fecha;
-                      if (element.tipomenu.id == 1) {//de la casa
-                        traspaso[i].deLaCasa = element.plato.nombre;
-                        traspaso[i].idDeLaCasa = element.id;
-                      }
-                      if (element.tipomenu.id == 2) {//oficina
-                        traspaso[i].oficina = element.plato.nombre;
-                        traspaso[i].idOficina = element.id;
-                      }
-                      if (element.tipomenu.id == 3) {//industrial
-                        traspaso[i].industrial = element.plato.nombre;
-                        traspaso[i].idIndustrial = element.id;
-                      }
-                      if (element.tipomenu.id == 4) {//hipocalorico
-                        traspaso[i].hipocalorico = element.plato.nombre;
-                        traspaso[i].idHipocalorico = element.id;
-                      }
-                      if (element.tipomenu.id == 5) {//vegetariano
-                        traspaso[i].vegetariano = element.plato.nombre;
-                        traspaso[i].idVegetariano = element.id;
-                      }
-                      if (element.tipomenu.id == 6) {//regimen
-                        traspaso[i].regimen = element.plato.nombre;
-                        traspaso[i].idRegimen = element.id;
-                      }
-
-                    }
-                  }
-                });
-                console.log(traspaso);
-                restMenu2 = traspaso;
-                this.dataSource = new MatTableDataSource(traspaso);
-
-              },
-              err => console.log(err)
-            );
-
+          this.dataSource.data = resCarta;
+          restMenu2 = resCarta;
         },
         err => console.log(err)
       );

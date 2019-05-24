@@ -71,7 +71,7 @@
       <select class="form-control form-control-lg" #mIndustrial [(ngModel)]="data.industrial">
         <option style="background:crimson ; color: aliceblue">Industrial</option>
         <option>--------</option>
-        <option *ngFor='let plato of platos'> {{plato.id}}</option>
+        <option *ngFor='let plato of platos'> {{plato.nombre}}</option>
       </select>
       <select class="form-control form-control-lg" #mDeLaCasa [(ngModel)]="data.deLaCasa">
         <option style="background:crimson ; color: aliceblue">De la casa</option>
