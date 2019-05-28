@@ -86,34 +86,28 @@
 </mat-form-field>
       -->
       <select class="form-control form-control-lg" #mDeLaCasa [(ngModel)]="data.p1">
-        <option style="background:crimson ; color: aliceblue">De la casa</option>
-        <option>--------</option>
+        
         <option *ngFor='let plato of platos'  value={{plato.id}}>{{plato.nombre}}</option>
       </select>
       <select class="form-control form-control-lg" #mOficina [(ngModel)]="data.p2">
-        <option style="background:crimson ; color: aliceblue">Oficina</option>
-        <option>--------</option>
+        
         <option *ngFor='let plato of platos'  value={{plato.id}}>{{plato.nombre}}</option>
       </select>
       <select class="form-control form-control-lg" #mIndustrial [(ngModel)]="data.p3">
-        <option style="background:crimson ; color: aliceblue">Industrial</option>
-        <option>--------</option>
+        
         <option *ngFor='let plato of platos'  value={{plato.id}}> {{plato.nombre}}</option>
       </select>
       
       <select class="form-control form-control-lg" #mHipocalorico [(ngModel)]="data.p4">
-        <option style="background:crimson ; color: aliceblue">Hipocalorico</option>
-        <option>--------</option>
+        
         <option *ngFor='let plato of platos'  value={{plato.id}}>{{plato.nombre}}</option>
       </select>
       <select class="form-control form-control-lg" #mVegetariano [(ngModel)]="data.p5">
-        <option style="background:crimson ; color: aliceblue">Vegetariano</option>
-        <option>--------</option>
+        
         <option *ngFor='let plato of platos'  value={{plato.id}}>{{plato.nombre}}</option>
       </select>
       <select class="form-control form-control-lg" #mRegimen [(ngModel)]="data.p6">
-        <option style="background:crimson ; color: aliceblue">Regimen</option>
-        <option>--------</option>
+        
         <option *ngFor='let plato of platos' value={{plato.id}}>{{plato.nombre}}</option>
       </select>
 

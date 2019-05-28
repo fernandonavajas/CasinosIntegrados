@@ -62,15 +62,15 @@ export class MenuAdminComponent implements OnInit {
       startWith(''),
       map(values => this._filter(values))
     );
-    this.dataSource.paginator = this.paginator;
-    this.dataSource.sort = this.sort;
   }
   
   private _filter(value: string): string[] {
     const filterValue = value.toLowerCase();
-
+    
     return this.options.filter(option => option.toLowerCase().includes(filterValue));
     */
+   this.dataSource.paginator = this.paginator;
+   this.dataSource.sort = this.sort;
   }
   /////////////////////////////
   applyFilter(filterValue: string) {
