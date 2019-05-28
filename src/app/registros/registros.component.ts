@@ -118,6 +118,8 @@ export class RegistrosComponent implements OnInit {
     this.dataSource = new MatTableDataSource(this.selectedMenu);
   }
 
+  
+
   Modificar(menu2: any) { //funcion para agregar los pedidos con su correspondiente detalle
     var user = JSON.parse(localStorage.getItem('currentUser'));
     

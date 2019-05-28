@@ -59,6 +59,7 @@ export class RegistroService {
     })
     return this.http.post<any>(`${this.BASE_URL}/detalle`, detalle);
   }
+  
 
 
 }

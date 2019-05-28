@@ -8,27 +8,28 @@
 
       <!-- fecha Column -->
       <ng-container matColumnDef="fecha">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> Fecha </th>
-        <td mat-cell *matCellDef="let row" (click)="AbrirParaEditar(row)"> {{row.fechacarta |  date:'shortDate'}} </td>
+        <th mat-header-cell *matHeaderCellDef mat-sort-header style="width: 5%;"> Fecha </th>
+        <td mat-cell *matCellDef="let row" (click)="AbrirParaEditar(row)" style="width: 5%;">
+          {{row.fechacarta |  date:'shortDate'}} </td>
       </ng-container>
-
+      
       <!-- menu 1 Column -->
+      <ng-container matColumnDef="deLaCasa">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Menú de la casa </th>
+        <td mat-cell *matCellDef="let row" (click)="AbrirParaEditar(row)"> {{row.delacasa}} </td>
+      </ng-container>
+      <!-- menu 2 Column -->
+      <ng-container matColumnDef="oficina">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Menú Oficina </th>
+        <td mat-cell *matCellDef="let row" (click)="AbrirParaEditar(row)"> {{row.oficina}} </td>
+      </ng-container>
+      <!-- menu 3 Column -->
       <ng-container matColumnDef="industrial">
         <th mat-header-cell *matHeaderCellDef mat-sort-header> Menú Industrial</th>
         <td mat-cell *matCellDef="let row" (click)="AbrirParaEditar(row)"> {{row.industrial}} </td>
       </ng-container>
 
-      <!-- menu 2 Column -->
-      <ng-container matColumnDef="deLaCasa">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> Menú de la casa </th>
-        <td mat-cell *matCellDef="let row" (click)="AbrirParaEditar(row)"> {{row.delacasa}} </td>
-      </ng-container>
 
-      <!-- menu 3 Column -->
-      <ng-container matColumnDef="oficina">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> Menú Oficina </th>
-        <td mat-cell *matCellDef="let row" (click)="AbrirParaEditar(row)"> {{row.oficina}} </td>
-      </ng-container>
 
       <!-- menu 4 Column -->
       <ng-container matColumnDef="hipocalorico">
@@ -36,16 +37,23 @@
         <td mat-cell *matCellDef="let row" (click)="AbrirParaEditar(row)"> {{row.hipocalorico}} </td>
       </ng-container>
 
-      <!-- menu 4 Column -->
+      <!-- menu 5 Column -->
       <ng-container matColumnDef="vegetariano">
         <th mat-header-cell *matHeaderCellDef mat-sort-header> Menú Vegetariano </th>
         <td mat-cell *matCellDef="let row" (click)="AbrirParaEditar(row)"> {{row.vegetariano}} </td>
       </ng-container>
 
-      <!-- menu 4 Column -->
+      <!-- menu 6 Column -->
       <ng-container matColumnDef="regimen">
         <th mat-header-cell *matHeaderCellDef mat-sort-header> Menú Regimen </th>
         <td mat-cell *matCellDef="let row" (click)="AbrirParaEditar(row)"> {{row.regimen}} </td>
+      </ng-container>
+      <!-- eliminar Column -->
+      <ng-container matColumnDef="eliminar">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> </th>
+        <td mat-cell *matCellDef="let row">
+          <button mat-raised-button (click)="Eliminar(row.fechacarta)" class="btn btn-danger">Eliminar</button>
+        </td>
       </ng-container>
 
 
@@ -66,37 +74,47 @@
 -->
   <div class="agregar ">
     <div class="container ">
-      <input class="inputNormal" type="text"  #f [(ngModel)]="fecha" placeholder='Agregar Fecha'>
-
-      <select class="form-control form-control-lg" #mIndustrial [(ngModel)]="data.industrial">
-        <option style="background:crimson ; color: aliceblue">Industrial</option>
-        <option>--------</option>
-        <option *ngFor='let plato of platos'> {{plato.nombre}}</option>
-      </select>
-      <select class="form-control form-control-lg" #mDeLaCasa [(ngModel)]="data.deLaCasa">
+      <input matInput [matDatepicker]="picker" class="inputNormal" type="text" readonly [min]="minDate" #f
+        [(ngModel)]="data.fecha" placeholder='Elige una Fecha'>
+      <mat-datepicker-toggle class="iconCalendario" matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+      <!--
+        <mat-form-field>
+  <input matInput [matDatepicker]="picker" placeholder="Choose a date">
+  <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+  <mat-datepicker #picker></mat-datepicker>
+</mat-form-field>
+      -->
+      <select class="form-control form-control-lg" #mDeLaCasa [(ngModel)]="data.p1">
         <option style="background:crimson ; color: aliceblue">De la casa</option>
         <option>--------</option>
-        <option *ngFor='let plato of platos'>{{plato.id}}</option>
+        <option *ngFor='let plato of platos'  value={{plato.id}}>{{plato.nombre}}</option>
       </select>
-      <select class="form-control form-control-lg" #mOficina [(ngModel)]="data.oficina">
+      <select class="form-control form-control-lg" #mOficina [(ngModel)]="data.p2">
         <option style="background:crimson ; color: aliceblue">Oficina</option>
         <option>--------</option>
-        <option *ngFor='let plato of platos'>{{plato.id}}</option>
+        <option *ngFor='let plato of platos'  value={{plato.id}}>{{plato.nombre}}</option>
       </select>
-      <select class="form-control form-control-lg" #mHipocalorico [(ngModel)]="data.hipocalorico">
+      <select class="form-control form-control-lg" #mIndustrial [(ngModel)]="data.p3">
+        <option style="background:crimson ; color: aliceblue">Industrial</option>
+        <option>--------</option>
+        <option *ngFor='let plato of platos'  value={{plato.id}}> {{plato.nombre}}</option>
+      </select>
+      
+      <select class="form-control form-control-lg" #mHipocalorico [(ngModel)]="data.p4">
         <option style="background:crimson ; color: aliceblue">Hipocalorico</option>
         <option>--------</option>
-        <option *ngFor='let plato of platos'>{{plato.id}}</option>
+        <option *ngFor='let plato of platos'  value={{plato.id}}>{{plato.nombre}}</option>
       </select>
-      <select class="form-control form-control-lg" #mVegetariano [(ngModel)]="data.vegetariano">
+      <select class="form-control form-control-lg" #mVegetariano [(ngModel)]="data.p5">
         <option style="background:crimson ; color: aliceblue">Vegetariano</option>
         <option>--------</option>
-        <option *ngFor='let plato of platos'>{{plato.id}}</option>
+        <option *ngFor='let plato of platos'  value={{plato.id}}>{{plato.nombre}}</option>
       </select>
-      <select class="form-control form-control-lg" #mRegimen [(ngModel)]="data.regimen">
+      <select class="form-control form-control-lg" #mRegimen [(ngModel)]="data.p6">
         <option style="background:crimson ; color: aliceblue">Regimen</option>
         <option>--------</option>
-        <option *ngFor='let plato of platos'>{{plato.id}}</option>
+        <option *ngFor='let plato of platos' value={{plato.id}}>{{plato.nombre}}</option>
       </select>
 
       <button class="pullRight" mat-raised-button (click)="Agregar()" class="btnAgregar">Agregar</button>
@@ -105,5 +123,16 @@
     <!--<button mat-raised-button *ngIf="selectedMenu.fecha !== 0" (click)="Eliminar()"
       class="btnEliminar">Eliminar</button>-->
   </div>
+  <!--<form class="example-form">
+    <mat-form-field class="example-full-width">
+      <input type="text" placeholder="Pick one" aria-label="Number" matInput [formControl]="myControl" [matAutocomplete]="auto">
+      <mat-autocomplete #auto="matAutocomplete">
+        <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+          {{option}}
+        </mat-option>
+      </mat-autocomplete>
+    </mat-form-field>
+  </form>
+  -->
 
 </body>

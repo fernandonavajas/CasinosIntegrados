@@ -1,7 +1,7 @@
 //En este archivo incluir todo lo necesario de angular material
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
-import { MatButtonModule, MatCheckboxModule } from '@angular/material';
+import { MatButtonModule, MatCheckboxModule, MatDatepickerModule, MatNativeDateModule,  } from '@angular/material';
 import { MatTableModule } from '@angular/material/table';
 import {MatPaginatorModule} from '@angular/material/paginator'
 import {MatFormFieldModule} from '@angular/material/form-field';
@@ -10,6 +10,9 @@ import {MatSortModule} from '@angular/material/sort';
 import { NgModule } from '@angular/core';
 import {MatExpansionModule} from '@angular/material/expansion';
 import {MatDialogModule} from '@angular/material/dialog';
+import {MatAutocompleteModule } from '@angular/material/autocomplete';
+
+
 
 //abeja
 const modulos=[
@@ -23,7 +26,11 @@ const modulos=[
     MatToolbarModule, 
     MatIconModule,
     MatExpansionModule,
-    MatDialogModule
+    MatDialogModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatAutocompleteModule
+
 
 ]
 

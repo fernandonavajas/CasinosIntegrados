@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './material';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 //componentes
 import { AppComponent } from './app.component';
@@ -29,6 +29,7 @@ import { NavbarService } from './navbar/navbar.service';
 import { LoginService } from './login/login.service';
 
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -52,10 +53,10 @@ import { LoginService } from './login/login.service';
     AppRoutingModule,
     MaterialModule,
     FormsModule,
+    ReactiveFormsModule,
     HttpClientModule
   ],
   exports: [
-
   ],
   entryComponents: [
     LoginComponent,

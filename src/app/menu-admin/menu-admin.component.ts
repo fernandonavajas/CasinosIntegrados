@@ -1,9 +1,11 @@
 import { Router } from '@angular/router';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
-import { MenuAdminService } from './menu-admin.service';
+import { MenuAdminService, data1 } from './menu-admin.service';
 import { Menus } from '../modelo/menus';
-
+import {Observable} from 'rxjs';
+import {map, startWith} from 'rxjs/operators';
+import { FormControl } from '@angular/forms';
 var restCarta: Menus[];
 
 @Component({
@@ -12,22 +14,26 @@ var restCarta: Menus[];
   styleUrls: ['./menu-admin.component.css']
 })
 export class MenuAdminComponent implements OnInit {
-  displayedColumns: string[] = ['fecha', 'industrial', 'deLaCasa', 'oficina', 'hipocalorico', 'vegetariano', 'regimen'];
+  displayedColumns: string[] = ['fecha',  'deLaCasa', 'oficina', 'industrial', 'hipocalorico', 'vegetariano', 'regimen', 'eliminar'];
   dataSource: MatTableDataSource<Menus>;
-
+  minDate = new Date();
   platos = [];
-  data = {
-    industrial: 0,
-    deLaCasa: 0,
-    oficina: 0,
-    hipocalorico: 0,
-    vegetariano: 0,
-    regimen: 0,
+  data: data1 = {
+    fecha: new Date(),
+    p1: 0,
+    p2: 0,
+    p3: 0,
+    p4: 0,
+    p5: 0,
+    p6: 0,
 
   };
   fecha: Date;
-
-
+///////////////////// variables del filtro input
+  /*myControl = new FormControl();
+  options = [];
+  filteredOptions: Observable<string[]>;
+////////////////////*/
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
@@ -44,14 +50,29 @@ export class MenuAdminComponent implements OnInit {
       if (user.tokens[0].rol == 'admin') {
         this.getPlatos();
         this.getCarta();
+        //funcion que guarde en la variables options la lista de platos con id y nombres
       }
       else {
         this._router.navigate(['']);
       }
     }
+    ///////////////////////////////filtro del input buscador de platos
+   /* this.filteredOptions = this.myControl.valueChanges
+    .pipe(
+      startWith(''),
+      map(values => this._filter(values))
+    );
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
   }
+  
+  private _filter(value: string): string[] {
+    const filterValue = value.toLowerCase();
+
+    return this.options.filter(option => option.toLowerCase().includes(filterValue));
+    */
+  }
+  /////////////////////////////
   applyFilter(filterValue: string) {
     this.dataSource.filter = filterValue.trim().toLowerCase();
     //console.log(this.dataSource.filteredData);
@@ -68,14 +89,14 @@ export class MenuAdminComponent implements OnInit {
   }
 
   Agregar() {
+    console.log(this.data)
     if (this.data) {
 
-      var carta = {
-        fecha: this.convertirFecha(this.fecha),
-        tipoMenuId: 0,
-        platoId: 0
-      }
-      console.log(carta.fecha);
+      console.log(this.data);
+      this.menuAdminService.crearCarta(this.data).subscribe(
+        r => { this.getCarta(); }
+      )
+      /*
       if (this.data.deLaCasa) {
         carta.tipoMenuId = 1;
         carta.platoId = this.data.deLaCasa;
@@ -122,21 +143,18 @@ export class MenuAdminComponent implements OnInit {
           r => { this.getCarta(); }
         )
       }
-
+*/
     }
-  }
-  Eliminar() {
-    if (confirm('¿Estas seguro de eliminar a este usuario?')) {
-
-    }
-
   }
 
   getPlatos() {
     this.menuAdminService.listarPlatos()
       .subscribe(
         resPlatos => {
-          this.platos = resPlatos;
+          console.log(resPlatos);
+          /*this.options = resPlatos;// esto es una locura, pero guarda JSONs
+          console.log(this.options)*/
+          this.platos=resPlatos;
         },
         err => console.log(err)
       )
@@ -145,7 +163,7 @@ export class MenuAdminComponent implements OnInit {
   convertirFecha(fecha: any): Date {
     //console.log(fecha,"para cambiar");
     var date_input = new Date(fecha);
-    var day = date_input.getDate() + 1;
+    var day = date_input.getDate();
     var month = date_input.getMonth() + 1;
     var year = date_input.getFullYear();
     var yyyy_MM_dd = year + "-" + month + "-" + day;
@@ -159,11 +177,27 @@ export class MenuAdminComponent implements OnInit {
       .subscribe(
         resCarta => {
           console.log(resCarta);
-          this.dataSource.data=resCarta;
+          this.dataSource.data = resCarta;
           this.dataSource.paginator = this.paginator;
           this.dataSource.sort = this.sort;
         },
         err => console.log(err)
       );
+  }
+  Eliminar(fechaConsultada: string) {
+    console.log("Eliminar ", fechaConsultada, typeof (fechaConsultada));
+
+    if (confirm('¿Estas seguro de eliminar a este usuario?')) {
+      var user = JSON.parse(localStorage.getItem('currentUser'));
+      this.menuAdminService.eliminarCartaPorFecha(fechaConsultada)
+        .subscribe(
+          res => {
+            this.getCarta(); // actualizar la data
+          },
+          err => console.log(err)
+        );
+    }
+
+
   }
 }

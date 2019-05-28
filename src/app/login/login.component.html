@@ -12,11 +12,15 @@
       <form>
         <!-- USERNAME INPUT -->
         <label for="username">Rut</label>
-        <input type="text" #username name="username" id="username" placeholder="Ingresa tu rut : 18990554">
+        <!-- (keydown)="formatoRut(username.value);" -->
+        <!-- (keypress)-->
+        <!-- (blur)-->
+        <input type="text" #username name="username" id="username" maxlength="12"
+          (blur)="formatoRut(username.value);" (focus)="limpiarInput();" [(ngModel)]="rutValidado" placeholder="Ingresa tu rut : 189905548">
         <!-- PASSWORD INPUT -->
         <label for="password">Contraseña</label>
         <input type="password" #password name="password" placeholder="Ingresa contraseña">
-        <button class='bt mat-raised-button' type="submit"  (click)='logIn(username.value, password.value, $event)' id="login-button" >Iniciar sesión</button>
+        <button class='bt mat-raised-button' type="submit"  *ngIf="rutValidadoBoolean" (click)='logIn(username.value, password.value, $event)' id="login-button" >Iniciar sesión</button>
         <!--(click)="logIn(username.value, password.value, $event) href="\menu"-->
         <a href="#" (click)="forgot(username.value)">¿Olvido su contraseña?</a><br>
       </form>
