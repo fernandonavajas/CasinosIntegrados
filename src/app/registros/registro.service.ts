@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpHeaders, HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Pedido } from '../modelo/pedido';
 import { Carta } from '../modelo/carta';
 import { resultadopedido } from './registros.component';
 

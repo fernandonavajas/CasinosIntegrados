@@ -3,9 +3,6 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
 import { MenuAdminService, data1 } from './menu-admin.service';
 import { Menus } from '../modelo/menus';
-import {Observable} from 'rxjs';
-import {map, startWith} from 'rxjs/operators';
-import { FormControl } from '@angular/forms';
 var restCarta: Menus[];
 
 @Component({

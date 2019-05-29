@@ -2,9 +2,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
 import { Router } from '@angular/router';
-import { DatePipe } from '@angular/common';
 import { HistorialService } from './historial.service';
-import { element } from '@angular/core/src/render3';
 import { HistorialCliente } from '../modelo/historialCliente';
 
 

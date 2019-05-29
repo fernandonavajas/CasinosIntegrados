@@ -1,11 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { User } from '../modelo/user'
 import { NavbarService } from '../navbar/navbar.service';
 import { LoginService } from './login.service';
-import { Tokens } from '../modelo/userTokens';
 
-const rutUsuario = '';
 
 @Component({
   selector: 'app-login',

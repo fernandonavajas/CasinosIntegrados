@@ -1,7 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatSort, MatTableDataSource } from '@angular/material';
 import { Router } from '@angular/router';
-import { DataSource, FooterRowOutlet } from '@angular/cdk/table';
 import { RegistroService } from './registro.service';
 
 export class Menu2 {
