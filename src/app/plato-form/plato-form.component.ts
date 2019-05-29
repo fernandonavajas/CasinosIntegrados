@@ -42,7 +42,7 @@ export class PlatoFormComponent implements OnInit {
     }
   }
 
-  sumbiPlato() {
+  submitPlato() {
     console.log(this.plato);
     this.platoService.crearPlato(this.plato)
       .subscribe(

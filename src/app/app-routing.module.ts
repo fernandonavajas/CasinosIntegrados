@@ -3,7 +3,6 @@ import { Routes, RouterModule } from '@angular/router';
 import { ClienteFormComponent } from './cliente-form/cliente-form.component';
 import { RegistrosComponent } from './registros/registros.component';
 import { LoginComponent } from './login/login.component';
-import { MenusComponent } from './menus/menus.component';
 import { HistorialComponent } from './historial/historial.component';
 import { ContactoComponent } from './contacto/contacto.component';
 import { HomeAdminComponent } from './home-admin/home-admin.component';
@@ -17,7 +16,6 @@ const routes: Routes = [
   { path: 'cadmin/edit/:id', component: ClienteFormComponent },
   { path: 'menu', component: RegistrosComponent },
   { path: '', component: LoginComponent, pathMatch: 'full' },
-  { path: 'registro', component: MenusComponent },
   { path: 'historial', component: HistorialComponent },
   { path: 'contacto', component: ContactoComponent },
   { path: 'hadmin', component: HomeAdminComponent },

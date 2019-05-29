@@ -9,7 +9,6 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { LoginComponent } from './login/login.component';
-import { MenusComponent } from './menus/menus.component';
 import { HistorialComponent } from './historial/historial.component'
 import { RegistrosComponent } from './registros/registros.component';
 import { ContactoComponent } from './contacto/contacto.component';
@@ -36,7 +35,6 @@ import { LoginService } from './login/login.service';
     RegistrosComponent,
     LoginComponent,
     NavbarComponent,
-    MenusComponent,
     ContactoComponent,
     HistorialComponent,
     HomeAdminComponent,
