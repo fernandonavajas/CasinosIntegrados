@@ -9,7 +9,7 @@ import { User } from '../modelo/user';
 })
 export class LoginService {
 
-  BASE_URL: string = 'http://localhost:3000';
+  BASE_URL: string = 'http://204.48.16.194:3000';
   constructor(private http: HttpClient) { }
 
   loggin(rut:string,pass: string): Observable<User> {

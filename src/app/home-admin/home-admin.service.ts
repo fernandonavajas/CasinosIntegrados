@@ -8,7 +8,7 @@ import { Observable } from 'rxjs';
 })
 export class HomeAdminService {
 
-  BASE_URL: string = 'http://localhost:3000';
+  BASE_URL: string = 'http://204.48.16.194:3000';
   constructor(private http: HttpClient) { }
 
   listarHistorialAdmin(): Observable<any[]> {

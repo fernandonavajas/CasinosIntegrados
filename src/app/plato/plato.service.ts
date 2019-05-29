@@ -13,7 +13,7 @@ const headers = new HttpHeaders({
 })
 export class PlatoService {
 
-  BASE_URL: string = 'http://localhost:3000';
+  BASE_URL: string = 'http://204.48.16.194:3000';
   constructor(private http: HttpClient) { }
 
   listarPlatos(): Observable<Platos[]> {

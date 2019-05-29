@@ -11,7 +11,8 @@ import { resultadopedido } from './registros.component';
 })
 export class RegistroService {
 
-  BASE_URL: string = 'http://localhost:3000';
+  //BASE_URL: string = 'http://localhost:3000';
+  BASE_URL: string = 'http://204.48.16.194:3000';
   constructor(private http: HttpClient) { }
 
   listarRegistro(rut: string): Observable<any[]> {
