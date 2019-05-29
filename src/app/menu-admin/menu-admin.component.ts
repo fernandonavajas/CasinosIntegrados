@@ -86,10 +86,10 @@ export class MenuAdminComponent implements OnInit {
   }
 
   Agregar() {
-    console.log(this.data)
+    //console.log(this.data)
     if (this.data) {
 
-      console.log(this.data);
+      //console.log(this.data);
       this.menuAdminService.crearCarta(this.data).subscribe(
         r => { this.getCarta(); }
       )
@@ -173,7 +173,7 @@ export class MenuAdminComponent implements OnInit {
     this.menuAdminService.listarCarta()
       .subscribe(
         resCarta => {
-          console.log(resCarta);
+          //console.log(resCarta);
           this.dataSource.data = resCarta;
           this.dataSource.paginator = this.paginator;
           this.dataSource.sort = this.sort;
@@ -182,7 +182,7 @@ export class MenuAdminComponent implements OnInit {
       );
   }
   Eliminar(fechaConsultada: string) {
-    console.log("Eliminar ", fechaConsultada, typeof (fechaConsultada));
+    //console.log("Eliminar ", fechaConsultada, typeof (fechaConsultada));
 
     if (confirm('¿Estas seguro de eliminar a este usuario?')) {
       var user = JSON.parse(localStorage.getItem('currentUser'));

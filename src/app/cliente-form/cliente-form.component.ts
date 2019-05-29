@@ -29,12 +29,12 @@ export class ClienteFormComponent implements OnInit {
 
   ngOnInit() {
     const params = this.ActivateRoute.snapshot.params;
-    console.log(params);
+    //console.log(params);
     if (params.id != 0) {
       this.clienteAdminService.seleccionarCliente(params.id)
         .subscribe(
           res => {
-            console.log(res);
+            //console.log(res);
             this.cliente = res;
             this.edit = true;
           },
@@ -44,13 +44,13 @@ export class ClienteFormComponent implements OnInit {
   }
 
   sumbitCliente() {
-    console.log(this.cliente);
+    //console.log(this.cliente);
     this.clienteAdminService.crearCliente(this.cliente)
       .subscribe(
         res => {
           this.clienteAdminService.CambiarPassword(this.cliente.rut,"2019")
           .subscribe();
-          console.log(res);
+          //console.log(res);
           this.router.navigate(['/cadmin']);
         },
         err => {
@@ -63,11 +63,11 @@ export class ClienteFormComponent implements OnInit {
     this.clienteAdminService.updateCliente(this.cliente.id, this.cliente)
       .subscribe(
         res => {
-          console.log(res);
+          //console.log(res);
           this.router.navigate(['/cadmin']);
         },
         err => {
-          console.log(err)
+         // console.log(err)
         }
       );
   }

@@ -20,7 +20,13 @@ margin-right: 5%;
   width: 90%;
   
 }
-
+p{
+  font-size: 14px;
+  color: aliceblue;
+  margin: 10px;
+  width: 100px;
+  padding: 0 10px;
+}
 td, th {
   width: 13%;
   font-size: 14px;

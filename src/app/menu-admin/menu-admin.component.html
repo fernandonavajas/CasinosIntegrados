@@ -1,4 +1,5 @@
 <body>
+  <code >En esta ventana se listan todas las cartas creadas por ti, puedes crear nuevas cartas en el formulario al final de la pagina</code>
   <mat-form-field class="w60">
     <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filtro">
   </mat-form-field>
@@ -73,7 +74,15 @@
 </table>
 -->
   <div class="agregar ">
-    <div class="container ">
+    <div class="container" style="color: aliceblue; font-size: 14px; ">
+      <p>De La Casa</p>
+      <p>oficina</p>
+      <p>Industrial</p>
+      <p>Hipocalorico</p>  
+      <p>Vegetariano </p> 
+      <p>Regimen</p>
+    </div>
+    <div class="container " >
       <input matInput [matDatepicker]="picker" class="inputNormal" type="text" readonly [min]="minDate" #f
         [(ngModel)]="data.fecha" placeholder='Elige una Fecha'>
       <mat-datepicker-toggle class="iconCalendario" matSuffix [for]="picker"></mat-datepicker-toggle>
@@ -98,7 +107,7 @@
         <option *ngFor='let plato of platos'  value={{plato.id}}> {{plato.nombre}}</option>
       </select>
       
-      <select class="form-control form-control-lg" #mHipocalorico [(ngModel)]="data.p4">
+      <select class="form-control form-control-lg" #mHipocalorico [(ngModel)]="data.p4"> 
         
         <option *ngFor='let plato of platos'  value={{plato.id}}>{{plato.nombre}}</option>
       </select>

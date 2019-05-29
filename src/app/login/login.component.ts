@@ -34,7 +34,7 @@ export class LoginComponent implements OnInit {
     document.getElementById("username").innerHTML = '';
     this.rutValidado='';
     this.rutValidadoNumber='';
-    console.log("limpiado");
+    //console.log("limpiado");
   }
   formatoRut(rut) {
     this.rutValidadoBoolean=this.validaRut(rut);
@@ -65,10 +65,10 @@ export class LoginComponent implements OnInit {
         sRut += sInvertido.charAt(j);
     }
     rut = sRut.toUpperCase();
-    console.log(rut);
-    console.log("asi va:  ",sRut);
+    //console.log(rut);
+    //console.log("asi va:  ",sRut);
     this.rutValidado=sRut;
-    console.log(this.rutValidadoNumber);
+    //console.log(this.rutValidadoNumber);
     
     
     
@@ -76,7 +76,7 @@ export class LoginComponent implements OnInit {
 
   validaRut(rut)
 {
-  console.log(rut)//189905548
+  //console.log(rut)//189905548
     //Valor acumulado para el calculo de la formula
     var nAcumula = 0;
     //Factor por el cual se debe multiplicar el valor de la posicion

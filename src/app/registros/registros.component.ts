@@ -62,7 +62,7 @@ export class RegistrosComponent implements OnInit {
       else {
         if (user.tokens[0].rol == 'cliente') {
           //this.getRegistro('18990554');//Esto me entrega el historial
-          console.log(user);
+          //console.log(user);
           this.getCarta(user.rut);
         }
         else {
@@ -79,7 +79,7 @@ export class RegistrosComponent implements OnInit {
     if (filterValue == '9/9/19') {
       var a = new Date('9/9/19')
       var b = a.toUTCString();
-      console.log(b);
+      //console.log(b);
     }
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
@@ -126,11 +126,11 @@ export class RegistrosComponent implements OnInit {
       if (element.cantdelacasa > 0 || element.canthipocalorico > 0 ||
         element.cantindustrial > 0 || element.cantvegetariano > 0 ||
         element.cantoficina > 0 || element.cantregimen > 0) {
-        console.log(element);
+        //console.log(element);
         this.registroService.submitPedido(user.rut, user.id) // generar un pedido con el rut del usuario
           .subscribe(
             res => {
-              console.log(res.identifiers[0].id);// este es el id del pedido generado
+              //console.log(res.identifiers[0].id);// este es el id del pedido generado
               if(element.cantdelacasa>=0){
                 //console.log(element.cantdelacasa);// esta es la cantidad a guardar
                 //console.log(element.iddelacasa);// estes es el id de la carta
@@ -186,7 +186,7 @@ export class RegistrosComponent implements OnInit {
       .subscribe(
         res => {
 
-          console.log(res)
+          //console.log(res)
         },
         err => console.log(err)
       )

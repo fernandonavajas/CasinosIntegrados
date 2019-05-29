@@ -61,7 +61,7 @@ export class HomeAdminComponent implements OnInit {
     if (filterValue == '9/9/19') {
       var a = new Date('9/9/19')
       var b = a.toUTCString();
-      console.log(b);
+      //console.log(b);
     }
     this.dataSource.filter = filterValue.trim().toLowerCase();
     if (this.dataSource.paginator) {

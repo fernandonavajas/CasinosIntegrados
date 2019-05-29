@@ -32,7 +32,7 @@ export class HistorialComponent implements OnInit {
     }
     else {
       var user = JSON.parse(localStorage.getItem('currentUser'));
-      console.log(user.rut,typeof(user.rut));
+      //console.log(user.rut,typeof(user.rut));
       this.gethistorial(user.rut);
 
       this.dataSource.paginator = this.paginator;
@@ -46,7 +46,7 @@ export class HistorialComponent implements OnInit {
     if (filterValue == '9/9/19') {
       var a = new Date('9/9/19')
       var b = a.toUTCString();
-      console.log(b);
+      //console.log(b);
     }
     this.dataSource.filter = filterValue.trim().toLowerCase();
     if (this.dataSource.paginator) {
@@ -60,7 +60,7 @@ export class HistorialComponent implements OnInit {
           this.dataSource.data = res;
           this.dataSource.paginator = this.paginator;
           this.dataSource.sort = this.sort;
-          console.log(res);
+          //console.log(res);
         },
         err => console.log(err)
       )

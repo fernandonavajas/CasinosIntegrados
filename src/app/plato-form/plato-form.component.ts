@@ -33,7 +33,7 @@ export class PlatoFormComponent implements OnInit {
       this.platoService.seleccionarPlato(params.id)
         .subscribe(
           res => {
-            console.log(res);
+            //console.log(res);
             this.plato = res;
             this.edit = true;
           },
@@ -47,7 +47,7 @@ export class PlatoFormComponent implements OnInit {
     this.platoService.crearPlato(this.plato)
       .subscribe(
         res => {
-          console.log(res);
+          //console.log(res);
           this.router.navigate(['/plato']);
         },
         err => {
@@ -60,7 +60,7 @@ export class PlatoFormComponent implements OnInit {
     this.platoService.updatePlato(this.plato.id, this.plato)
       .subscribe(
         res => {
-          console.log(res);
+          //console.log(res);
           this.router.navigate(['/plato']);
         },
         err => {
