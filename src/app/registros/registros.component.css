@@ -2,7 +2,7 @@ body{
   background: rgb(0,93,169);
 background: linear-gradient(174deg, rgba(0,93,169,1) 0%, rgba(0,169,161,0.938813025210084) 84%);
 background-size: cover;
-  height: 100vh;
+  height: 100%;
 }
 
 
@@ -18,7 +18,7 @@ table {
   }
   
   .mat-form-field {
-    font-size: 15px;
+    font-size: 16px;
     font-weight: bold;
     width: 80%;
     margin-left: 10%;
@@ -27,11 +27,11 @@ table {
     text-align: left;
   }
   th {
-    font-size: 14.5px;
+    font-size: 16px;
     font-family: sans-serif;
   }
   td {
-    font-size: 12.5px;
+    font-size: 14px;
     font-family: sans-serif;
   }
   

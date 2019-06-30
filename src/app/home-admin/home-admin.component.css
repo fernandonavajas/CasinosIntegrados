@@ -2,7 +2,7 @@ body{
   background: rgb(110,177,122);
 background: linear-gradient(0deg, rgba(110,177,122,1) 0%, rgba(0,93,169,1) 100%);
   background-size: cover;
-  height: 100vh;
+  height: 100%;
 }
 
 table {
@@ -20,12 +20,12 @@ table {
   
   th {
     width: 7.14%;
-    font-size: 14px;
+    font-size: 16px;
     font-family: sans-serif;
   }
   td{
     width: 7.14%;
-    font-size: 12px;
+    font-size: 14px;
     font-family: sans-serif;
   }
   .mat-header-cell, .mat-cell {

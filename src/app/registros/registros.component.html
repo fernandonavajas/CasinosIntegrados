@@ -18,13 +18,13 @@
 
         <!-- Disfruto -Carla Morrison -->
         <ng-container matColumnDef="fecha">
-            <th class="espacioMediano" mat-header-cell *matHeaderCellDef mat-sort-header> Fecha </th>
-            <td class="espacioMediano" mat-cell *matCellDef="let row"> {{row.fechacarta |  date:'shortDate'}} </td>
+            <th class="espacioMediano" mat-header-cell *matHeaderCellDef >Fecha</th>
+            <td class="espacioMediano" mat-cell *matCellDef="let row"> {{row.fechacarta |  date:'dd-MM-yy'}} </td>
         </ng-container>
 
         <!-- menu 1 Column -->
         <ng-container matColumnDef="menuDeLaCasa">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header> Menú de la casa </th>
+            <th mat-header-cell *matHeaderCellDef> Menú de la casa </th>
             <td mat-cell *matCellDef="let row" class="onHover">
                 {{row.delacasa}}
                 <!--<img *ngIf="row.fotoDeLaCasa != ''" src={{row.fotoDeLaCasa}}>-->
@@ -33,7 +33,7 @@
 
         <!-- cantidad 1 Column -->
         <ng-container matColumnDef="cantDeLaCasa">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header> Cantidad</th>
+            <th mat-header-cell *matHeaderCellDef >Cant.</th>
             <td mat-cell *matCellDef="let row">
                 <input class="cantidad" #i1 type="number" min="0" value={{row.cantdelacasa}}
                     (change)="cambio(row.fechacarta,i1.value,1)">
@@ -42,7 +42,7 @@
 
         <!-- menu 2 Column -->
         <ng-container matColumnDef="menuOficina">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header> Menú oficina </th>
+            <th mat-header-cell *matHeaderCellDef >Menú oficina</th>
             <td mat-cell *matCellDef="let row" class="onHover">
                 {{row.oficina}}
                 <!--<img *ngIf="row.fotoOficina != ''" src={{row.fotoOficina}}>-->
@@ -51,7 +51,7 @@
 
         <!-- cantidad 2 Column -->
         <ng-container matColumnDef="cantOficina">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header> Cantidad </th>
+            <th mat-header-cell *matHeaderCellDef >Cant.</th>
             <td mat-cell *matCellDef="let row">
                 <input class="cantidad" #i2 type="number" min="0" value={{row.cantoficina}}
                     (change)="cambio(row.fechacarta,i2.value,2)">
@@ -59,7 +59,7 @@
         </ng-container>
         <!-- menu 3 Column -->
         <ng-container matColumnDef="menuIndustrial">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header> Menú Industrial </th>
+            <th mat-header-cell *matHeaderCellDef >Menú Industrial</th>
             <td mat-cell *matCellDef="let row" class="onHover">
                 {{row.industrial }}
                 <!--<img *ngIf="row.fotoIndustrial != ''" src={{row.fotoIndustrial}}>-->
@@ -68,7 +68,7 @@
 
         <!-- cantidad 3 Column -->
         <ng-container matColumnDef="cantIndustrial">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header> Cantidad </th>
+            <th mat-header-cell *matHeaderCellDef >Cant.</th>
             <td mat-cell *matCellDef="let row">
                 <input class="cantidad" #i3 type="number" min="0" value={{row.cantindustrial}}
                     (change)="cambio(row.fechacarta,i3.value,3)">
@@ -77,7 +77,7 @@
 
         <!-- menu 4 Column -->
         <ng-container matColumnDef="menuHipocalorico">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header> Menú Hipocalórico </th>
+            <th mat-header-cell *matHeaderCellDef >Menú Hipocalórico</th>
             <td mat-cell *matCellDef="let row" class="onHover"> {{row.hipocalorico}}
                 <!--<img *ngIf="row.fotoHipocalorico != ''" src={{row.fotoHipocalorico}}>-->
 
@@ -87,7 +87,7 @@
 
         <!-- cantidad 4 Column -->
         <ng-container matColumnDef="cantHipocalorico">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header> Cantidad </th>
+            <th mat-header-cell *matHeaderCellDef >Cant.</th>
             <td mat-cell *matCellDef="let row">
                 <input class="cantidad" #i4 type="number" min="0" value={{row.canthipocalorico}}
                     (change)="cambio(row.fechacarta,i4.value,4)">
@@ -96,7 +96,7 @@
 
         <!-- menu 5 Column -->
         <ng-container matColumnDef="menuVegetariano">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header> Menú vegertariano </th>
+            <th mat-header-cell *matHeaderCellDef >Menú vegertariano</th>
             <td mat-cell *matCellDef="let row" class="onHover"> {{row.vegetariano}}
                 <!--<img *ngIf="row.fotoVegetariano != ''" src={{row.fotoVegetariano}}>-->
 
@@ -105,7 +105,7 @@
 
         <!-- cantidad 5 Column -->
         <ng-container matColumnDef="cantVegetariano">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header> Cantidad </th>
+            <th mat-header-cell *matHeaderCellDef >Cant.</th>
             <td mat-cell *matCellDef="let row">
                 <input class="cantidad" #i5 type="number" min="0" value={{row.cantvegetariano}}
                     (change)="cambio(row.fechacarta,i5.value,5)">
@@ -113,7 +113,7 @@
         </ng-container>
         <!-- menu 6 Column -->
         <ng-container matColumnDef="menuRegimen">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header> Menú Regimen </th>
+            <th mat-header-cell *matHeaderCellDef >Menú Regimen</th>
             <td mat-cell *matCellDef="let row" class="onHover"> {{row.regimen}}
                 <!--<img *ngIf="row.fotoRegimen != ''" src={{row.fotoRegimen}}>-->
 
@@ -122,7 +122,7 @@
 
         <!-- cantidad 6 Column -->
         <ng-container matColumnDef="cantRegimen">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header> Cantidad </th>
+            <th mat-header-cell *matHeaderCellDef>Cant.</th>
             <td mat-cell *matCellDef="let row">
                 <input class="cantidad" #i6 type="number" min="0" pattern="[0-9]" value={{row.cantregimen}}
                     (change)="cambio(row.fechacarta,i6.value,6)">
@@ -133,7 +133,7 @@
 
         <!-- Cantidad total Column -->
         <ng-container matColumnDef="Total">
-            <th class="espacioChico" mat-header-cell *matHeaderCellDef mat-sort-header> Total </th>
+            <th class="espacioChico" mat-header-cell *matHeaderCellDef>Total</th>
             <td class="espacioChico" mat-cell *matCellDef="let row">
                 {{row.cantvegetariano+row.cantdelacasa+row.cantindustrial+row.cantoficina+row.canthipocalorico+row.cantregimen}}
             </td>

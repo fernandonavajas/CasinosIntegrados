@@ -3,7 +3,7 @@ body {
 background: radial-gradient(circle, rgba(174,234,238,1) 0%, rgba(0,93,169,1) 100%);
     background-size: cover;
     font-family: sans-serif;
-    height:95vh;
+    height:100%;
     
   }
 
