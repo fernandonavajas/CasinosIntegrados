@@ -3,6 +3,7 @@ body{
 background: linear-gradient(0deg, rgba(179,189,19,1) 0%, rgba(0,93,169,1) 100%);
   background-size: cover;
   height: 100%;
+  min-height: 92vh;
 }
 table {
     width: 100%;
