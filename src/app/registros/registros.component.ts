@@ -207,7 +207,7 @@ export class RegistrosComponent implements OnInit {
         resCarta => {
           resCarta.forEach(element => {
           });
-          console.log(resCarta);
+          //console.log(resCarta);
           this.dataSource.data = resCarta;
           restMenu2 = resCarta;
         },

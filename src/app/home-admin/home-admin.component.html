@@ -1,8 +1,29 @@
 <body>
-  <code >Bienvenido administrador, en esta ventana se listan todos los pedidos de los usuarios, navega por los botones para conocer más</code>
-  <mat-form-field>
-    <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filtro">
-  </mat-form-field>
+  <code>Bienvenido administrador, en esta ventana se listan todos los pedidos de los usuarios, navega por los botones para conocer más</code>
+
+  <form>
+    <div class="container">
+      <!--input empresa -->
+      <input type="text" class="form-control filtroEmpresa" #inputEmpresa placeholder="Nombre empresa">
+      <!--datepicker 1-->
+      <input [matDatepicker]="picker1" class="form-control filtroEmpresa" type="text" readonly [min]="minDate"
+        style="padding:10px; width:110px;" #fi [(ngModel)]="fechaInicio" 
+        [ngModelOptions]="{standalone: true}" placeholder='Fecha Inicio'>
+      <mat-datepicker-toggle class="iconCalendario" matSuffix [for]="picker1"></mat-datepicker-toggle>
+      <mat-datepicker #picker1></mat-datepicker>
+      <!--datepicker 2-->
+      <input [matDatepicker]="picker2" class="form-control filtroEmpresa" type="text" readonly [min]="fechaInicio"
+        style="padding:10px; width:110px;" #ft [(ngModel)]="fechaTermino" 
+        [ngModelOptions]="{standalone: true}" placeholder='Fecha Termino'>
+      <mat-datepicker-toggle class="iconCalendario" matSuffix [for]="picker2"></mat-datepicker-toggle>
+      <mat-datepicker #picker2></mat-datepicker>
+      
+      <!--buton filtrar -->
+      <button class="btnFiltrar" mat-raised-button (click)="filtroEmpresaFechaInicioFechaTermino(inputEmpresa.value)">Filtrar</button>
+      <button class="btnFiltrar"  style="background:rgb(223, 156, 11);" mat-raised-button (click)="eliminarFiltro()">Eliminar filtro</button>
+    </div>
+  </form>
+
 
   <table mat-table [dataSource]="dataSource" matSort>
 
@@ -14,7 +35,7 @@
 
     <!-- fecha Column   {{row.fecha | date:'shortDate'}}   -->
     <ng-container matColumnDef="fecha">
-      <th mat-header-cell *matHeaderCellDef >Fecha</th>
+      <th mat-header-cell *matHeaderCellDef>Fecha</th>
       <td mat-cell *matCellDef="let row"> {{row.fechacarta| date:'dd-MM-yy'}} </td>
     </ng-container>
 
@@ -22,37 +43,37 @@
 
     <!-- menu 1 Column -->
     <ng-container matColumnDef="menu2">
-      <th mat-header-cell *matHeaderCellDef >De la Casa</th>
+      <th mat-header-cell *matHeaderCellDef>De la Casa</th>
       <td mat-cell *matCellDef="let row"> {{row.delacasa}} </td>
     </ng-container>
 
     <!-- cantidad 1 Column -->
     <ng-container matColumnDef="cant2">
-      <th mat-header-cell *matHeaderCellDef >Cant.</th>
+      <th mat-header-cell *matHeaderCellDef>Cant.</th>
       <td mat-cell *matCellDef="let row"> {{row.cantdelacasa}} </td>
     </ng-container>
 
     <!-- menu 2 Column -->
     <ng-container matColumnDef="menu3">
-      <th mat-header-cell *matHeaderCellDef >Oficina</th>
+      <th mat-header-cell *matHeaderCellDef>Oficina</th>
       <td mat-cell *matCellDef="let row"> {{row.oficina}} </td>
     </ng-container>
 
     <!-- cantidad 2 Column -->
     <ng-container matColumnDef="cant3">
-      <th mat-header-cell *matHeaderCellDef >Cant.</th>
+      <th mat-header-cell *matHeaderCellDef>Cant.</th>
       <td mat-cell *matCellDef="let row"> {{row.cantoficina}} </td>
     </ng-container>
     <!-- menu 3 Column -->
     <ng-container matColumnDef="menu1">
-      <th mat-header-cell *matHeaderCellDef >Industrial</th>
+      <th mat-header-cell *matHeaderCellDef>Industrial</th>
       <td mat-cell *matCellDef="let row"> {{row.industrial}} </td>
     </ng-container>
 
     <!-- cantidad 3 Column -->
-    <ng-container matColumnDef="cant1" >
-      <th mat-header-cell *matHeaderCellDef >Cant.</th>
-      <td mat-cell *matCellDef="let row" > {{row.cantindustrial}} </td>
+    <ng-container matColumnDef="cant1">
+      <th mat-header-cell *matHeaderCellDef>Cant.</th>
+      <td mat-cell *matCellDef="let row"> {{row.cantindustrial}} </td>
     </ng-container>
 
     <!-- menu 4 Column -->
@@ -63,31 +84,31 @@
 
     <!-- cantidad 4 Column -->
     <ng-container matColumnDef="cant4">
-      <th mat-header-cell *matHeaderCellDef >Cant.</th>
+      <th mat-header-cell *matHeaderCellDef>Cant.</th>
       <td mat-cell *matCellDef="let row"> {{row.canthipocalorico}} </td>
     </ng-container>
 
     <!-- menu 5 Column -->
     <ng-container matColumnDef="menu5">
-      <th mat-header-cell *matHeaderCellDef >Vegetariano</th>
+      <th mat-header-cell *matHeaderCellDef>Vegetariano</th>
       <td mat-cell *matCellDef="let row"> {{row.vegetariano}} </td>
     </ng-container>
 
     <!-- cantidad 5 Column -->
     <ng-container matColumnDef="cant5">
-      <th mat-header-cell *matHeaderCellDef >Cant.</th>
+      <th mat-header-cell *matHeaderCellDef>Cant.</th>
       <td mat-cell *matCellDef="let row"> {{row.cantvegetariano}} </td>
     </ng-container>
 
     <!-- menu 6 Column -->
     <ng-container matColumnDef="menu6">
-      <th mat-header-cell *matHeaderCellDef >Regimen</th>
+      <th mat-header-cell *matHeaderCellDef>Regimen</th>
       <td mat-cell *matCellDef="let row"> {{row.regimen}} </td>
     </ng-container>
 
     <!-- cantidad 6 Column -->
     <ng-container matColumnDef="cant6">
-      <th mat-header-cell *matHeaderCellDef >Cant.</th>
+      <th mat-header-cell *matHeaderCellDef>Cant.</th>
       <td mat-cell *matCellDef="let row"> {{row.cantregimen}} </td>
     </ng-container>
 

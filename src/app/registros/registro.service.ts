@@ -41,7 +41,7 @@ export class RegistroService {
       fecha: new Date(),
       usuarioId: idUsuario
     }
-    console.log(pedido);
+    //console.log(pedido);
     const headers = new HttpHeaders({
       "Content-Type": "*/*"
     })
@@ -53,7 +53,7 @@ export class RegistroService {
       idCarta: cartaId,
       idPedido: pedidoId
     }
-    console.log("Esto esta en la funcion submit detalle ",detalle);
+    //console.log("Esto esta en la funcion submit detalle ",detalle);
     const headers = new HttpHeaders({
       "Content-Type": "*/*"
     })
