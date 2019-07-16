@@ -15,7 +15,7 @@ const restHistorial: HistorialCliente[] = []
 })
 export class HistorialComponent implements OnInit {
 
-  displayedColumns: string[] = ['fecha', 'menu1', 'cant1', 'menu2', 'cant2',
+  displayedColumns: string[] = ['fechacarta', 'menu1', 'cant1', 'menu2', 'cant2',
     'menu3', 'cant3', 'menu4', 'cant4', 'menu5', 'cant5', 'menu6', 'cant6'];
   dataSource: MatTableDataSource<HistorialCliente>;
 

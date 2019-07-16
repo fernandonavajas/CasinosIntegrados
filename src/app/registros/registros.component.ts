@@ -40,8 +40,8 @@ var restMenu2: Menu2[] = [];
 })
 export class RegistrosComponent implements OnInit {
 
-  displayedColumns: string[] = ['fecha', 'menuDeLaCasa', 'cantDeLaCasa', 'menuOficina', 'cantOficina',
-    'menuIndustrial', 'cantIndustrial', 'menuHipocalorico', 'cantHipocalorico', 'menuVegetariano', 'cantVegetariano', 'menuRegimen', 'cantRegimen', 'Total'];
+  displayedColumns: string[] = ['fecha','menuIndustrial', 'cantIndustrial', 'menuDeLaCasa', 'cantDeLaCasa', 'menuOficina', 'cantOficina',
+     'menuHipocalorico', 'cantHipocalorico', 'menuVegetariano', 'cantVegetariano', 'menuRegimen', 'cantRegimen', 'Total'];
   dataSource: MatTableDataSource<Menu2>;
 
   @ViewChild(MatSort) sort: MatSort;

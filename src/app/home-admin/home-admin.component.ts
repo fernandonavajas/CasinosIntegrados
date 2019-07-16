@@ -3,6 +3,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
 import { Router } from '@angular/router';
 import { HomeAdminService } from './home-admin.service';
+import * as XLSX from 'xlsx';
 
 export interface Hadmin {
   empresa: string;
@@ -13,12 +14,12 @@ export interface Hadmin {
   hipocalorico: string;
   vegetariano: string;
   regimen: string;
-  cantIndustrial: number;
-  cantDelaCasa: number;
-  cantOficina: number;
-  cantHipocalorico: number;
-  cantVegetariano: number;
-  cantRegimen: number;
+  cantindustrial: number;
+  cantdelacasa: number;
+  cantoficina: number;
+  canthipocalorico: number;
+  cantvegetariano: number;
+  cantregimen: number;
 }
 const restHadmin: Hadmin[] = [];
 
@@ -28,7 +29,7 @@ const restHadmin: Hadmin[] = [];
   styleUrls: ['./home-admin.component.css']
 })
 export class HomeAdminComponent implements OnInit {
-  displayedColumns: string[] = ['empresa', 'fecha', 'menu1', 'cant1', 'menu2',
+  displayedColumns: string[] = ['empresa', 'fechacarta', 'menu1', 'cant1', 'menu2',
     'cant2', 'menu3', 'cant3', 'menu4', 'cant4', 'menu5', 'cant5', 'menu6', 'cant6'];
   dataSource: MatTableDataSource<Hadmin>;
   fechaInicio: Date=new Date();
@@ -50,7 +51,7 @@ export class HomeAdminComponent implements OnInit {
       if (user.tokens[0].rol == 'admin') {
         this.gethistorialAdmin();
         //this.dataSource.paginator = this.paginator;
-        //this.dataSource.sort = this.sort;
+        this.dataSource.sort = this.sort;
       }
       else {
         this._router.navigate(['']);
@@ -68,6 +69,23 @@ export class HomeAdminComponent implements OnInit {
     this.applyFilter("");
     this.gethistorialAdmin();
   }
+  exportarTabla(){
+    const listadoImprimir: any[]= [];
+    listadoImprimir.push(['Empresa','Fecha','Menu industrial','Cantidad',
+     ' Menu de la casa','Cantidad','Menu oficina','Cantidad','Menu Hipocalorico','Cantidad',
+      'Menu Vegetariano','Cantidad','Menu Regimen','Cantidad']);
+    this.dataSource.data.forEach(row => {
+      listadoImprimir.push([row.empresa,row.fechacarta,row.industrial,row.cantindustrial,
+        row.deLaCasa,row.cantdelacasa,row.oficina,row.cantoficina,row.hipocalorico,row.canthipocalorico,
+        row.vegetariano,row.cantvegetariano,row.regimen,row.cantregimen]);
+    });
+    const ws: XLSX.WorkSheet = XLSX.utils.aoa_to_sheet(listadoImprimir);
+    const wb: XLSX.WorkBook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(wb, ws,'Datos');
+    //Guardar el archivo
+    const dte: String = new Date().getDate().toString() +'-'+ new Date().getMonth().toString()+'-'+ new Date().getFullYear().toString();
+    XLSX.writeFile(wb, `Registro(${dte}).xlsx`);
+  }
   filtroEmpresaFechaInicioFechaTermino(empresaFiltrada: string) {
     this.listaFiltrada=[];
     //console.log(empresaFiltrada);
@@ -81,7 +99,7 @@ export class HomeAdminComponent implements OnInit {
         var fechaCarta = new Date(element.fechacarta);
         if(fechaCarta>=this.fechaInicio && fechaCarta<=this.fechaTermino ){
           this.listaFiltrada.push(element);
-          console.log(this.listaFiltrada); 
+          //console.log(this.listaFiltrada); 
         }
         contador--;
         if(contador==0){// una vez que los recorre todos..

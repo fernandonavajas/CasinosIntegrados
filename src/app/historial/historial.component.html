@@ -7,9 +7,9 @@
       <table mat-table [dataSource]="dataSource" matSort>
   
         <!-- fecha Column -->
-        <ng-container matColumnDef="fecha">
+        <ng-container matColumnDef="fechacarta">
           <th mat-header-cell *matHeaderCellDef mat-sort-header> Fecha </th>
-          <td mat-cell *matCellDef="let row"> {{row.fechacarta | date:'shortDate' }} </td>
+          <td mat-cell *matCellDef="let row"> {{row.fechacarta | date:'dd-MM-yy'}} </td>
         </ng-container>
   
         <!-- menu 1 Column -->
